@@ -1,7 +1,8 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { api } from "./api/api";
 import CategoriesElement from "./components/Categories/Categories";
+import Loading from "./components/Loading";
 import { LoadingContext } from "./contexts";
 import { Question } from './types';
 
@@ -24,23 +25,31 @@ const AppWrapper = styled.div`
 const Questions = () => {
 
     const [questions, setQuestions] = React.useState<Question[]>([]);
+    const [once, setOnce] = useState(false);
     const loadingCTX = useContext(LoadingContext);
 
     React.useEffect(() => {
 
-        const getQuestions = async () => {
-            const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
-            const newQuestion = await api.getQuestions(sessId);
-            setQuestions(newQuestion)
-            loadingCTX.setValue(false);
+        if (!once) {
+
+            const getQuestions = async () => {
+                const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+                const newQuestion = await api.getQuestions(sessId);
+                setQuestions(newQuestion)
+                loadingCTX.setValue(false);
+            }
+    
+            loadingCTX.setValue(true);
+            getQuestions();
+            setOnce(true);
         }
 
-        loadingCTX.setValue(true);
-        getQuestions()
-    }, [loadingCTX])
+
+    }, [loadingCTX, once])
 
     return (
         <AppWrapper>
+            {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions}/> 
         </AppWrapper>
     )
