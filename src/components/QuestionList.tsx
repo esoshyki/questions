@@ -1,11 +1,15 @@
 import React, { useContext, Fragment } from 'react';
 import styled from 'styled-components';
 import { LoadingContext } from '../contexts';
+import { theme } from '../theme';
 import { Question } from '../types';
 import Loading from './Loading';
 import QuestionItem from './Question';
 
 const QuestionListWrapper = styled.div`
+    border-radius: 10px;
+    border: 1px solid ${theme.colors.borderGray};
+    overflow: hidden;
     display: flex;
     width: 100%;
     justify-content: flex-start;

@@ -9,6 +9,7 @@ import QuestionList from "../QuestionList";
 const CategoryWrapper = styled.div`
     position: relative;
     width: 100%;
+    margin: 10px 0;
 `;
 
 const Category = ({ questions, category } : { 
@@ -27,8 +28,8 @@ const Category = ({ questions, category } : {
             }}>
                 <Accordion
                     headerText={category}
-                    backgroundColor={theme.colors.headerBackgroundCategory}
-                    color={"#fff"}
+                    backgroundColor={theme.colors.gray}
+                    color={"#000"}
                     parent={true}
                     >
                     <QuestionList questions={questions}/>

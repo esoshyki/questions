@@ -17,8 +17,8 @@ const QuestionItem = ({ question } : QuestionItemProps) => {
     return (
         <Accordion 
             headerText={question.header}
-            backgroundColor={theme.colors.headerBackground}
-            color={"#fff"}
+            backgroundColor={theme.colors.gray}
+            color={"#000"}
             >
             <Content>
                 {question.body}
