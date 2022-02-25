@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import Questions from './Questions';
+import { LoadingContext } from './contexts';
+import { ReactNode } from "react";
+import { LoadingValue } from './types';
+
+interface WrapperProps {
+  children: ReactNode
+};
+
+const ContextWrapper = ({ children } : WrapperProps) => {
+
+  const [loading, setLoading] = useState(false);
+
+  const loadingValue : LoadingValue = {
+    value: loading,
+    setValue: (value: boolean) => setLoading(value)
+  }
+
+  return (
+    <LoadingContext.Provider value={loadingValue} >
+      {children}
+    </LoadingContext.Provider>
+  )
+}
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  <ContextWrapper>
+    <Questions />
+  </ContextWrapper>,
+  document.getElementById("root")
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
