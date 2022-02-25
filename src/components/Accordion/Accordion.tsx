@@ -67,7 +67,7 @@ const AccordionContent = styled.div<{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    transition: transform 150ms ease-in 400ms, opacity 500ms ease-in;
+    transition: transform 150ms ease-in 400ms, opacity 500ms ease-in 200ms;
     transform: ${props => props.visible ? "translateY(0%)" : "translateY(-100%)"};
     opacity: ${props => props.visible ? 1 : 0};
 `;
