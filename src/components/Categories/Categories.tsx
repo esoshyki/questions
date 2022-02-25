@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { categories, Categories, Question } from "../../types";
+import { categories, Question } from "../../types";
 import PageTitle from "../Layout/PageTitle";
-import QuestionList from "../QuestionList";
 import Category from "./Category";
 
 const CategoriesWrapper = styled.div`

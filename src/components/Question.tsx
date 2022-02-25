@@ -1,7 +1,6 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 import { Question } from "../types";
 import Accordion from "./Accordion";
-import QuestionList from "./QuestionList";
 import styled from 'styled-components'
 import { theme } from "../theme";
 

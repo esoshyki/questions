@@ -91,7 +91,7 @@ const Accordion = ({ children, backgroundColor, color, headerText, parent } : {
                 }
             }
         }
-    }, [resizeCtx.value])
+    }, [resizeCtx, parent])
 
     return (
         <Container >

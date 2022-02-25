@@ -1,4 +1,4 @@
-import React, { useContext, Fragment, useEffect } from 'react';
+import React, { useContext, Fragment } from 'react';
 import styled from 'styled-components';
 import { LoadingContext } from '../contexts';
 import { Question } from '../types';
@@ -21,11 +21,6 @@ const QuestionListContainer = styled.div`
     justify-content:  flex-start;
     width: 100%;
 `;
-
-const Questiontitle = styled.h3`
-    font-size: 1.5rem;
-    font-weight: 800;
-`
 
 interface QuestionListProps {
     questions: Question[]
