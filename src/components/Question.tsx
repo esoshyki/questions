@@ -9,7 +9,7 @@ interface QuestionItemProps {
 };
 
 const Content = styled.p`
-    
+    margin: 0;
 `;
 
 const QuestionItem = ({ question } : QuestionItemProps) => {

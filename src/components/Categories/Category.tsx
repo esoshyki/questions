@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ResizeContext } from "../../contexts";
-import { theme } from "../../theme";
 import { Categories, Question } from "../../types";
-import Accordion from "../Accordion";
+import CategoryTitle from "../Layout/CategoryTitle";
 import QuestionList from "../QuestionList";
 
 const CategoryWrapper = styled.div`
@@ -26,14 +25,11 @@ const Category = ({ questions, category } : {
                 value: resize,
                 setValue: (value: boolean) => setResize(value) 
             }}>
-                <Accordion
-                    headerText={category}
-                    backgroundColor={theme.colors.gray}
-                    color={"#000"}
-                    parent={true}
-                    >
-                    <QuestionList questions={questions}/>
-                </Accordion>
+                <CategoryTitle>
+                    {category}
+                </CategoryTitle>
+                <QuestionList questions={questions}/>
+
             </ResizeContext.Provider>
         </CategoryWrapper>
     )

@@ -52,6 +52,7 @@ const AccordionBody = styled.div<{
     top: 0;
     height: ${props => props.visibleHeight ? `${props.visibleHeight}px` : "0"};
     padding: ${props => props.visibleHeight ? "10px" : "0"};
+    color: ${theme.colors.textGray};
 `;
 
 const AccordionContent = styled.div<{
@@ -66,7 +67,7 @@ const AccordionContent = styled.div<{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    transition: transform 150ms ease-in 400ms, opacity 100ms ease-in;
+    transition: transform 150ms ease-in 400ms, opacity 500ms ease-in;
     transform: ${props => props.visible ? "translateY(0%)" : "translateY(-100%)"};
     opacity: ${props => props.visible ? 1 : 0};
 `;
@@ -88,6 +89,7 @@ const HeaderIcon = styled.div<{
         cursor: pointer;
         opacity: 1;
     }
+    
 `;
 
 const Accordion = ({ children, backgroundColor, color, headerText, parent } : { 
