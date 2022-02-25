@@ -26,17 +26,18 @@ const Questions = () => {
     const [questions, setQuestions] = React.useState<Question[]>([]);
     const loadingCTX = useContext(LoadingContext);
 
-    const getQuestions = async () => {
-        const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
-        const newQuestion = await api.getQuestions(sessId);
-        setQuestions(newQuestion)
-        loadingCTX.setValue(false);
-    }
-
     React.useEffect(() => {
+
+        const getQuestions = async () => {
+            const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+            const newQuestion = await api.getQuestions(sessId);
+            setQuestions(newQuestion)
+            loadingCTX.setValue(false);
+        }
+
         loadingCTX.setValue(true);
         getQuestions()
-    }, [getQuestions, loadingCTX])
+    }, [loadingCTX])
 
     return (
         <AppWrapper>
