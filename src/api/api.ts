@@ -13,8 +13,6 @@ const getQuestions = async (sessionId: string) : Promise<Question[]> => {
 
         const bitrixResponse: BitrixResponse = response.data;
 
-        console.log(bitrixResponse);
-
         const questions: Question[] = bitrixResponse.data;
         return questions
     } catch (error) {
