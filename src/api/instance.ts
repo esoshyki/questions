@@ -3,11 +3,11 @@ import { createMockInstance } from './mockApi';
 
 const apiURL = process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
-    : process.env.VERCEL_URL 
-    ? process.env.VERCEL_URL
+    : process.env.REACT_APP_VERCEL_URL 
+    ? process.env.REACT_APP_VERCEL_URL
     : "https://dev-bitrix.by/bitrix/services/main/ajax.php";
 
-const mock = process.env.NODE_ENV === "development" || !!process.env.VERCEL_URL;
+const mock = process.env.NODE_ENV === "development" || !!process.env.REACT_APP_VERCEL_URL;
 
 console.log("mock", mock)
 
