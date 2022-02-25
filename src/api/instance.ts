@@ -9,6 +9,8 @@ const apiURL = process.env.NODE_ENV === "development"
 
 const mock = process.env.NODE_ENV === "development" || !!process.env.VERCEL_URL;
 
+console.log("mock", mock)
+
 const instanceAPI = axios.create({
     baseURL: apiURL,
     headers: {
