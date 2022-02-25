@@ -36,7 +36,7 @@ const Questions = () => {
     React.useEffect(() => {
         loadingCTX.setValue(true);
         getQuestions()
-    }, [getQuestions])
+    }, [getQuestions, loadingCTX])
 
     return (
         <AppWrapper>
