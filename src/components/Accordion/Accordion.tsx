@@ -45,7 +45,7 @@ const AccordionBody = styled.div<{
     width: 100%;
     position: relative;
     opacity: ${props => props.visibleHeight ? 1 : 0};
-    transition: opacity 100ms linear 500ms, height 300ms linear;
+    transition: opacity 100ms linear 0s, height 300ms linear;
     user-select: none;
     z-index: 4;
     overflow: hidden;
@@ -67,8 +67,8 @@ const AccordionContent = styled.div<{
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
-    transition: transform 150ms ease-in 400ms, opacity 500ms ease-in 200ms;
-    transform: ${props => props.visible ? "translateY(0%)" : "translateY(-100%)"};
+    transition: transform 150ms ease-in 0s, opacity 500ms ease-in 200ms;
+    top: ${props => props.visible ? "translateY(0%)" : "translateY(-100%)"};
     opacity: ${props => props.visible ? 1 : 0};
 `;
 

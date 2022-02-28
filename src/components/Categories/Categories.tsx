@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import styled from "styled-components";
 import { categories, Question } from "../../types";
 import PageTitle from "../Layout/PageTitle";
+import Search from "../Search";
 import Category from "./Category";
 
 const CategoriesWrapper = styled.div`
@@ -23,14 +24,16 @@ const CategoriesElement = ({ questions } : CategoriesProps) => {
         <CategoriesWrapper>
             <PageTitle>Вопросы</PageTitle>
 
+            <Search />
+
             <Fragment>
                 {
                     Object.entries(categories).map(([key, value]) => {
                         return (
                             <Fragment key={value}>
                                 <Category 
-                                questions={questions.filter(question => question.chapter === value)}
-                                category={value}
+                                    questions={questions.filter(question => question.chapter === value)}
+                                    category={value}
                                 />
                             </Fragment>
                         )

@@ -33,4 +33,10 @@ export interface LoadingValue {
     setValue: (value: boolean) => void;
 }
 
+export interface SearchValue {
+    value: string,
+    setValue: (value: string) => void;
+}
+
+
 export interface ResizeValue extends LoadingValue {}

@@ -1,6 +1,6 @@
 import React, { useContext, Fragment } from 'react';
 import styled from 'styled-components';
-import { LoadingContext } from '../contexts';
+import { LoadingContext, SearchContext } from '../contexts';
 import { theme } from '../theme';
 import { Question } from '../types';
 import Loading from './Loading';
@@ -33,14 +33,21 @@ interface QuestionListProps {
 const QuestionList = ({questions} : QuestionListProps) => {
 
     const loadingCtx = useContext(LoadingContext);
+    const searchCtx = useContext(SearchContext);
 
+    const filter = searchCtx.value;
+
+    const filteredQuestions = !filter ? questions : questions.filter(question => {
+        return new RegExp(filter.toLowerCase()).test(question.header.toLowerCase()) || 
+        new RegExp(filter.toLowerCase()).test(question.body.toLowerCase())
+    })
    
     return (
         <QuestionListWrapper>
             {loadingCtx.value && <Loading />}
 
             <QuestionListContainer>
-                {questions.map((question, id) => {
+                {filteredQuestions.map((question, id) => {
                     return (
                         <Fragment key={id}>
                             <QuestionItem question={question}/>
