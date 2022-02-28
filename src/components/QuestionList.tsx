@@ -1,9 +1,8 @@
 import React, { useContext, Fragment } from 'react';
 import styled from 'styled-components';
-import { LoadingContext, SearchContext } from '../contexts';
+import { SearchContext } from '../contexts';
 import { theme } from '../theme';
 import { BitrixQuestion } from '../types';
-import Loading from './Loading';
 import QuestionItem from './Question';
 
 const QuestionListWrapper = styled.div`
@@ -32,7 +31,6 @@ interface QuestionListProps {
 
 const QuestionList = ({questions} : QuestionListProps) => {
 
-    const loadingCtx = useContext(LoadingContext);
     const searchCtx = useContext(SearchContext);
 
     const filter = searchCtx.value;
