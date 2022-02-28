@@ -5,7 +5,8 @@ const PageTitleWrapper = styled.h3`
     font-size: 1.2rem;
     font-weight: 800;
     font-family: Roboto, Open Sans, Helvetica Neue, sans-serif;
-    margin-bottom: 10px;
+    color: #fff;
+    margin: 0;
 `;
 
 interface PageTitleProps {

@@ -5,7 +5,7 @@ import Icon from '../../assets/search.png';
 
 const SearchWrapper = styled.div`
     position: absolute;
-    top: 80px;
+    top: 20px;
     height: 40px;
     width: 200px;
     right: 0;

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { categories, Question } from "../../types";
-import PageTitle from "../Layout/PageTitle";
 import Search from "../Search";
 import Category from "./Category";
 
@@ -22,7 +21,6 @@ const CategoriesElement = ({ questions } : CategoriesProps) => {
 
     return (
         <CategoriesWrapper>
-            <PageTitle>Вопросы</PageTitle>
 
             <Search />
 
