@@ -2,12 +2,13 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
+import { theme } from "../../theme";
 
 const SearchWrapper = styled.div`
     position: absolute;
     top: 20px;
     height: 40px;
-    width: 200px;
+    width: 400px;
     right: 0;
     align-self: flex-end;
     display: flex;
@@ -22,12 +23,13 @@ const SearchInput = styled.input<{
     visible: boolean
 }>`
     position: absolute;
-    width: 100%;
-    right: ${props => props.visible ? 0 : "-100%"};
+    width: calc(100% - 50px);
+    right: ${props => props.visible ? 0 : "calc(-100% - 50px)"};
     transition: right 200ms ease-in;
     border: none;
-    border-bottom: 1px solid black;
+    border-bottom: 2px solid black;
     padding: 10px;
+    margin-right: 50px;
     &:focus {
         outline: none;
     }
@@ -35,10 +37,10 @@ const SearchInput = styled.input<{
 
 const SearchIcon = styled.div`
     position: absolute;
-    top: 5px;
+    top: -9px;
     right: 5px;
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     background-image: url(${Icon});
     background-size: cover;
     z-index: 6;

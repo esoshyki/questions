@@ -3,7 +3,7 @@ import MockAdapter from "axios-mock-adapter";
 import { ApiActions, Categories, Question } from "../types";
 
 const BXparams = {
-    c: "manao:questions",
+    c: "manao:support.faq",
     mode: "class",
   };
 

@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { content } from "../../content";
 import { theme } from "../../theme";
 import AddQuestionButton from "../AddQuestion/AddQuestionButton";
 import PageTitle from "./PageTitle";
@@ -19,7 +20,7 @@ const Header = () => {
     return (
         <HeaderWrapper>
             <PageTitle>
-                Задачи
+                {content.header.title}
             </PageTitle>
 
             <AddQuestionButton />

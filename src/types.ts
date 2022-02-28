@@ -21,7 +21,7 @@ export type BitrixResponse = {
 }
 
 export enum ApiActions {
-    Questions = "questions"
+    Questions = "getListFaq"
 }
 
 export type IState = {

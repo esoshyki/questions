@@ -17,7 +17,7 @@ const instanceAPI = axios.create({
 });
 
 instanceAPI.defaults.params = {};
-instanceAPI.defaults.params["c"] = "manao:questions";
+instanceAPI.defaults.params["c"] = "manao:support.faq";
 instanceAPI.defaults.params["mode"] = "class";
 
 if (mock) {
