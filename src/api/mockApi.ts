@@ -80,5 +80,9 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
         }
     }).reply(200, { data: sections})
 
+    mock.onPost("/").reply(200, {
+        data: true
+    })
+
     return mock
 };

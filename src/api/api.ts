@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { ApiActions, BitrixQuestion, BitrixResponse, BitrixSection } from "../types";
+import { ApiActions, BitrixNewQuestion, BitrixQuestion, BitrixResponse, BitrixSection } from "../types";
 import instanceAPI from "./instance";
 
 const getQuestions = async (sessionId: string) : Promise<BitrixQuestion[]> => {
@@ -36,9 +36,31 @@ const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
     } catch (error) {
         return []
     }
+};
+
+const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Promise<BitrixResponse> => {
+    console.log(question);
+    try {
+        const response: AxiosResponse = await instanceAPI.post("/", question, {
+            params: {
+                action: ApiActions.NewQuestion,
+                sessId: sessionId
+            }
+        });
+
+        const data: BitrixResponse = response.data;
+        return data;
+    } catch (error: any) {
+        return {
+            data: false,
+            status: "success",
+            errors: [error]
+        }
+    }
 }
 
 export const api = {
     getQuestions,
-    getSections
+    getSections,
+    newQuestion
 }

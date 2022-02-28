@@ -22,6 +22,12 @@ export type BitrixQuestion = {
     DETAIL_TYPE: string;
 };
 
+export type BitrixNewQuestion = {
+    NAME: string;
+    DETAIL_TEXT: string;
+    USER_ID?: string;
+}
+
 export type BitrixSection = {
     ID: number;
     NAME: string;
@@ -35,7 +41,8 @@ export type BitrixResponse = {
 
 export enum ApiActions {
     Questions = "getListFaq",
-    Sections = "getSections"
+    Sections = "getSections",
+    NewQuestion = "newQuestion"
 }
 
 export type IState = {

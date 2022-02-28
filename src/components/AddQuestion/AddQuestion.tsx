@@ -3,10 +3,14 @@ import styled from "styled-components";
 import Icon from '../../assets/plus.png'
 import { AddQuestionContext } from "../../contexts";
 import { AddQuestionTextArea } from "./AddQuestionTextArea";
-import { AddQuestionTitle } from "./AddQuestionTitle";
 import { theme } from "../../theme";
 import CheckBox from "./CheckBox";
-import { AddQuestionType } from "../../types";
+import { AddQuestionTitle } from "./AddQuestionTitle";
+import { BitrixNewQuestion } from "../../types";
+import { api } from "../../api/api";
+import { content } from "../../content";
+import { AddQuestionName } from "./AddQuestionName";
+import { AddQuestionLabel } from "./AddQuestionLabel";
 
 const AddQuestionWrapper = styled.div<{
     visible: boolean
@@ -77,51 +81,83 @@ const AddQuestion = () => {
 
     const addQuestionCTX = useContext(AddQuestionContext);
 
-    const [question, setQuestion] = useState<AddQuestionType>({
-        text: "",
-    })
+    const [question, setQuestion] = useState<BitrixNewQuestion>({
+        DETAIL_TEXT: "",
+        NAME: ""
+    });
+    const [errors, setErrors] = useState<any[]>([]);
 
     const onClick = () => {
         addQuestionCTX.setValue(false);
     }
 
-    const send = () => {
-        console.log("send");
-        addQuestionCTX.setValue(false);
+    const send = async () => {
+        console.log('send');
+        const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+        const response = await api.newQuestion(sessId, { 
+            DETAIL_TEXT: question.DETAIL_TEXT,
+            NAME: question.NAME
+        });
+
+        console.log(response.data);
+
+        if (response.data) {
+            addQuestionCTX.setValue(false);
+        } 
+        if (response.errors) {
+            setErrors(response.errors)
+        };
+
     }
 
     const toggle = () => {
         setQuestion({
             ...question,
-            id: question.id ? undefined : window.bxConfig?.sessid || "TESTid"
+            USER_ID: question.USER_ID ? undefined : window.bxConfig?.sessid || "TESTid"
         })
     }
 
     return (
-        <AddQuestionWrapper visible={addQuestionCTX.value}>
+        <AddQuestionWrapper visible={addQuestionCTX.value} className={errors.length ? "errors" : ""}>
 
             <CloseIcon onClick={onClick}/>
 
             <AddQuestionContent>
                 <AddQuestionTitle>
-                    Задать вопрос
+                    {content.addQuestion.makeQuestion}
                 </AddQuestionTitle>
 
-                <AddQuestionTextArea 
-                    value={question.text} 
+                <AddQuestionLabel>
+                    {content.addQuestion.name}
+                </AddQuestionLabel>
+
+                <AddQuestionName 
+                    value={question.NAME}
                     onChange={e => setQuestion({
                         ...question,
-                        text: e.target.value
+                        NAME: e.target.value
+                    })}
+                    />
+
+                <AddQuestionLabel>
+                    {content.addQuestion.question}
+                </AddQuestionLabel>
+
+                <AddQuestionTextArea 
+                    value={question.DETAIL_TEXT} 
+                    onChange={e => setQuestion({
+                        ...question,
+                        DETAIL_TEXT: e.target.value
                     })}/>
 
                 <Button 
                     style={{position: "relative"}}
                     onClick={send}
                     >
-                    Отправить
+                    {content.addQuestion.send}
                 </Button>
 
-                <CheckBox checked={Boolean(question.id)} toggle={toggle}/>
+                <CheckBox checked={Boolean(question.USER_ID)} toggle={toggle}/>
                 
             </AddQuestionContent>
 

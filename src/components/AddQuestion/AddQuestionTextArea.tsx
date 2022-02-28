@@ -8,11 +8,10 @@ export const AddQuestionTextArea = styled.textarea`
     font-family: ${theme.fonts.main};
     background-color: #fff;
     color: ${theme.colors.textGray};
-    margin: 10px 0;
+    border: 1px solid ${theme.colors.borderGray};
 
     &:focus {
         outline: none !important;
-        border: 1px solid ${theme.colors.borderGray};
-        border-width: 2px;
+        border: 1px solid #000;
     }
 `
