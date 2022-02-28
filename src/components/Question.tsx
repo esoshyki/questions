@@ -1,11 +1,11 @@
 import React from "react";
-import { Question } from "../types";
+import { BitrixQuestion } from "../types";
 import Accordion from "./Accordion";
 import styled from 'styled-components'
 import { theme } from "../theme";
 
 interface QuestionItemProps {
-    question: Question;
+    question: BitrixQuestion;
 };
 
 const Content = styled.p`
@@ -16,12 +16,12 @@ const QuestionItem = ({ question } : QuestionItemProps) => {
 
     return (
         <Accordion 
-            headerText={question.header}
+            headerText={question.NAME}
             backgroundColor={theme.colors.gray}
             color={"#000"}
             >
-            <Content>
-                {question.body}
+            <Content dangerouslySetInnerHTML={{__html : question.DETAIL_TEXT || ""}}>
+
             </Content>
         </Accordion>
     )

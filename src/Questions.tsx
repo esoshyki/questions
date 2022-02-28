@@ -5,7 +5,7 @@ import CategoriesElement from "./components/Categories/Categories";
 import Header from "./components/Layout/Header";
 import Loading from "./components/Loading";
 import { LoadingContext, SearchContext } from "./contexts";
-import { Question } from './types';
+import { BitrixQuestion, BitrixSection } from './types';
 
 declare global {
     interface Window {
@@ -29,7 +29,8 @@ const AppWrapper = styled.div<{
 
 const Questions = () => {
 
-    const [questions, setQuestions] = useState<Question[]>([]);
+    const [questions, setQuestions] = useState<BitrixQuestion[]>([]);
+    const [sections, setSections] = useState<BitrixSection[]>([]);
     const [once, setOnce] = useState(false);
     const loadingCTX = useContext(LoadingContext);
     const searchCTX = useContext(SearchContext);
@@ -38,18 +39,21 @@ const Questions = () => {
 
         if (!once) {
 
+            const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+
             const getQuestions = async () => {
-                const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+                const newSections = await api.getSections(sessId);
+                setSections(newSections);
+
                 const newQuestion = await api.getQuestions(sessId);
                 setQuestions(newQuestion)
                 loadingCTX.setValue(false);
             }
-    
+
             loadingCTX.setValue(true);
             getQuestions();
             setOnce(true);
         }
-
 
     }, [loadingCTX, once]);
 
@@ -67,7 +71,7 @@ const Questions = () => {
         <AppWrapper bitrix={!!window.bxConfig?.sessid} onClick={e => onClick(e)}>
             <Header />
             {loadingCTX.value && <Loading />}
-            <CategoriesElement questions={questions}/> 
+            <CategoriesElement questions={questions} sections={sections}/> 
         </AppWrapper>
     )
 };

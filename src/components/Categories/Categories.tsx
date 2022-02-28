@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
-import { categories, Question } from "../../types";
+import { BitrixQuestion, BitrixSection } from "../../types";
 import Search from "../Search";
 import Category from "./Category";
 
@@ -14,10 +14,11 @@ const CategoriesWrapper = styled.div`
 `;
 
 interface CategoriesProps {
-    questions: Question[];
+    questions: BitrixQuestion[];
+    sections: BitrixSection[];
 }
 
-const CategoriesElement = ({ questions } : CategoriesProps) => {
+const CategoriesElement = ({ questions, sections } : CategoriesProps) => {
 
     return (
         <CategoriesWrapper>
@@ -26,12 +27,12 @@ const CategoriesElement = ({ questions } : CategoriesProps) => {
 
             <Fragment>
                 {
-                    Object.entries(categories).map(([key, value]) => {
+                    sections.map((section, id) => {
                         return (
-                            <Fragment key={value}>
+                            <Fragment key={id}>
                                 <Category 
-                                    questions={questions.filter(question => question.chapter === value)}
-                                    category={value}
+                                    questions={questions.filter(question => question.IBLOCK_SECTION_ID === section.ID)}
+                                    category={section.NAME}
                                 />
                             </Fragment>
                         )

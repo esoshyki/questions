@@ -2,7 +2,7 @@ import React, { useContext, Fragment } from 'react';
 import styled from 'styled-components';
 import { LoadingContext, SearchContext } from '../contexts';
 import { theme } from '../theme';
-import { Question } from '../types';
+import { BitrixQuestion } from '../types';
 import Loading from './Loading';
 import QuestionItem from './Question';
 
@@ -27,7 +27,7 @@ const QuestionListContainer = styled.div`
 `;
 
 interface QuestionListProps {
-    questions: Question[]
+    questions: BitrixQuestion[]
 }
 
 const QuestionList = ({questions} : QuestionListProps) => {
@@ -38,8 +38,8 @@ const QuestionList = ({questions} : QuestionListProps) => {
     const filter = searchCtx.value;
 
     const filteredQuestions = !filter ? questions : questions.filter(question => {
-        return new RegExp(filter.toLowerCase()).test(question.header.toLowerCase()) || 
-        new RegExp(filter.toLowerCase()).test(question.body.toLowerCase())
+        return new RegExp(filter.toLowerCase()).test(question.NAME.toLowerCase()) || 
+        new RegExp(filter.toLowerCase()).test(question.DETAIL_TEXT.toLowerCase())
     })
    
     return (

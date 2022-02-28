@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { ResizeContext } from "../../contexts";
-import { Categories, Question } from "../../types";
+import { BitrixQuestion } from "../../types";
 import CategoryTitle from "../Layout/CategoryTitle";
 import QuestionList from "../QuestionList";
 
@@ -12,9 +12,8 @@ const CategoryWrapper = styled.div`
 `;
 
 const Category = ({ questions, category } : { 
-    questions: Question[];
-    category: Categories
-
+    questions: BitrixQuestion[];
+    category: string
 }) => {
 
     const [resize, setResize] = useState(false);

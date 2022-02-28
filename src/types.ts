@@ -12,6 +12,19 @@ export type Question = {
     header: string;
     body: string;
     chapter: Categories;
+};
+
+export type BitrixQuestion = {
+    ID: number,
+    IBLOCK_SECTION_ID: number,
+    NAME: string;
+    DETAIL_TEXT: string;
+    DETAIL_TYPE: string;
+};
+
+export type BitrixSection = {
+    ID: number;
+    NAME: string;
 }
 
 export type BitrixResponse = {
@@ -21,7 +34,8 @@ export type BitrixResponse = {
 }
 
 export enum ApiActions {
-    Questions = "getListFaq"
+    Questions = "getListFaq",
+    Sections = "getSections"
 }
 
 export type IState = {
