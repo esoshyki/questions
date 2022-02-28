@@ -5,6 +5,7 @@ import Questions from './Questions'
 import { AddQuestionContext, LoadingContext, SearchContext } from './contexts'
 import { ReactNode } from 'react'
 import { AddQuestionValue, LoadingValue, SearchValue } from './types'
+import './index.css'
 
 interface WrapperProps {
     children: ReactNode

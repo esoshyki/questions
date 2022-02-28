@@ -87,6 +87,7 @@ const AddQuestion = () => {
 
     const send = () => {
         console.log("send");
+        addQuestionCTX.setValue(false);
     }
 
     const toggle = () => {

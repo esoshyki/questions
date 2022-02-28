@@ -23,9 +23,14 @@ const SearchInput = styled.input<{
 }>`
     position: absolute;
     width: 100%;
-    padding: 10px;
     right: ${props => props.visible ? 0 : "-100%"};
     transition: right 200ms ease-in;
+    border: none;
+    border-bottom: 1px solid black;
+    padding: 10px;
+    &:focus {
+        outline: none;
+    }
 `;
 
 const SearchIcon = styled.div`
@@ -54,7 +59,6 @@ const Search = () => {
                 visible={visible}
                 value={searchContext.value} 
                 onChange={e => searchContext.setValue(e.target.value)}
-                className="ui-ctl-inline"
                 />
             <SearchIcon 
                 onClick={() => setVisible(!visible)}
