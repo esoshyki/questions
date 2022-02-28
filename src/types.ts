@@ -38,5 +38,15 @@ export interface SearchValue {
     setValue: (value: string) => void;
 }
 
+export interface AddQuestionValue {
+    value: boolean;
+    setValue: (value: boolean) => void;
+}
+
+export type AddQuestionType = {
+    text: string;
+    id?: string;
+}
+
 
 export interface ResizeValue extends LoadingValue {}

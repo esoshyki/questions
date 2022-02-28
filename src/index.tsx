@@ -2,9 +2,9 @@ import reportWebVitals from './reportWebVitals'
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Questions from './Questions'
-import { LoadingContext, SearchContext } from './contexts'
+import { AddQuestionContext, LoadingContext, SearchContext } from './contexts'
 import { ReactNode } from 'react'
-import { LoadingValue, SearchValue } from './types'
+import { AddQuestionValue, LoadingValue, SearchValue } from './types'
 
 interface WrapperProps {
     children: ReactNode
@@ -13,6 +13,7 @@ interface WrapperProps {
 const ContextWrapper = ({ children }: WrapperProps) => {
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState('')
+    const [showAddQuestion, setShowAddQuestion] = useState(false);
 
     const loadingValue: LoadingValue = {
         value: loading,
@@ -24,10 +25,17 @@ const ContextWrapper = ({ children }: WrapperProps) => {
         setValue: (value: string) => setSearch(value),
     }
 
+    const addQuestionValue: AddQuestionValue = {
+        value: showAddQuestion,
+        setValue: (value: boolean) => setShowAddQuestion(value)
+    }
+
     return (
         <LoadingContext.Provider value={loadingValue}>
             <SearchContext.Provider value={searchValue}>
-                {children}
+                <AddQuestionContext.Provider value={addQuestionValue}>
+                    {children}
+                </AddQuestionContext.Provider>
             </SearchContext.Provider>
         </LoadingContext.Provider>
     )

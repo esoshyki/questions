@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { api } from "./api/api";
 import CategoriesElement from "./components/Categories/Categories";
+import Header from "./components/Layout/Header";
 import Loading from "./components/Loading";
 import { LoadingContext } from "./contexts";
 import { Question } from './types';
@@ -24,7 +25,7 @@ const AppWrapper = styled.div`
 
 const Questions = () => {
 
-    const [questions, setQuestions] = React.useState<Question[]>([]);
+    const [questions, setQuestions] = useState<Question[]>([]);
     const [once, setOnce] = useState(false);
     const loadingCTX = useContext(LoadingContext);
 
@@ -49,6 +50,7 @@ const Questions = () => {
 
     return (
         <AppWrapper>
+            <Header />
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions}/> 
         </AppWrapper>
