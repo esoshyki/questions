@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useRef } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
