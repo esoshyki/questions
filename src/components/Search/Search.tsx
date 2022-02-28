@@ -2,7 +2,6 @@ import { useContext, useState } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
-import { theme } from "../../theme";
 
 const SearchWrapper = styled.div`
     position: absolute;
