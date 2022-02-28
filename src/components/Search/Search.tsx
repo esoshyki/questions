@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
@@ -54,15 +54,30 @@ const Search = () => {
     const [visible, setVisible] = useState(false);
     const searchContext = useContext(SearchContext);
 
+    const ref = useRef<HTMLInputElement>(null);
+
+    const handleClick = () => {
+        setVisible(!visible)
+    }
+
+    const handleTransitionEnd = () => {
+        
+        if (visible && ref.current) {
+            ref.current.focus()
+        }
+    }
+
     return (
         <SearchWrapper>
             <SearchInput 
+                ref={ref}
                 visible={visible}
                 value={searchContext.value} 
                 onChange={e => searchContext.setValue(e.target.value)}
+                onTransitionEnd={handleTransitionEnd}
                 />
             <SearchIcon 
-                onClick={() => setVisible(!visible)}
+                onClick={handleClick}
             />
         </SearchWrapper>
     )
