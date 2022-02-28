@@ -5,7 +5,7 @@ const apiURL = process.env.NODE_ENV === "development"
     ? "http://localhost:8080"
     : process.env.REACT_APP_VERCEL_URL 
     ? process.env.REACT_APP_VERCEL_URL
-    : "https://dev-bitrix.by/bitrix/services/main/ajax.php";
+    : "/bitrix/services/main/ajax.php";
 
 const mock = process.env.NODE_ENV === "development" || !!process.env.REACT_APP_VERCEL_URL;
 
