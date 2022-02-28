@@ -10,7 +10,7 @@ API
 
     params
         action: getSections,
-        sessId: string;
+        sessid: string;
 
 #### Response
     data:
@@ -24,7 +24,7 @@ API
 
     params
         action: getListFaq,
-        sessId: string;
+        sessid: string;
 
 #### Response
     data:
@@ -40,7 +40,7 @@ API
 
     params
         action: newQuestion,
-        sessId: string;
+        sessid: string;
         body: 
             NAME: string;
             DETAIL_TEXT: string;

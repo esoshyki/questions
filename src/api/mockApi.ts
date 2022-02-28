@@ -69,14 +69,14 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
     mock.onGet("/", {
         params: {
             ...BXparams, action: ApiActions.Questions,
-            sessId: sessionId
+            sessid: sessionId
         }
     }).reply(200, {data: questions});
 
     mock.onGet("/", {
         params: {
             ...BXparams, action: ApiActions.Sections,
-            sessId: sessionId
+            sessid: sessionId
         }
     }).reply(200, { data: sections})
 

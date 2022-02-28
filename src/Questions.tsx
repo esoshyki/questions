@@ -39,13 +39,13 @@ const Questions = () => {
 
         if (!once) {
 
-            const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+            const sessid = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
 
             const getQuestions = async () => {
-                const newSections = await api.getSections(sessId);
+                const newSections = await api.getSections(sessid);
                 setSections(newSections);
 
-                const newQuestion = await api.getQuestions(sessId);
+                const newQuestion = await api.getQuestions(sessid);
                 setQuestions(newQuestion)
                 loadingCTX.setValue(false);
             }

@@ -7,7 +7,7 @@ const getQuestions = async (sessionId: string) : Promise<BitrixQuestion[]> => {
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: { 
                 action: ApiActions.Questions,
-                sessId: sessionId
+                sessid: sessionId
             }
         })
 
@@ -25,7 +25,7 @@ const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: {
                 action: ApiActions.Sections,
-                sessId: sessionId
+                sessid: sessionId
             }
         });
 
@@ -44,7 +44,7 @@ const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Pro
         const response: AxiosResponse = await instanceAPI.post("/", question, {
             params: {
                 action: ApiActions.NewQuestion,
-                sessId: sessionId
+                sessid: sessionId
             }
         });
 

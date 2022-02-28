@@ -107,8 +107,8 @@ const AddQuestion = () => {
         };
 
         loadingCTX.setValue(true);
-        const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
-        const response = await api.newQuestion(sessId, { 
+        const sessid = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+        const response = await api.newQuestion(sessid, { 
             DETAIL_TEXT: question.DETAIL_TEXT,
             NAME: question.NAME
         });
