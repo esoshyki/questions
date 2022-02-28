@@ -6,20 +6,19 @@ const LoadingWrapper = styled.div`
     position: absolute;
     left: 0;
     top: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     z-index: 1;
     background-image: url(${LoadingIcon});
     background-repeat: no-repeat;
     background-position: center;
+    background-color: transparent;
 `
 
 const Loading = () => {
 
     return (
-        <LoadingWrapper>
-
-        </LoadingWrapper>
+        <LoadingWrapper />
     )
 };
 

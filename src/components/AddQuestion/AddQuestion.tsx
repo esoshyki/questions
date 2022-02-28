@@ -12,12 +12,13 @@ const AddQuestionWrapper = styled.div<{
     visible: boolean
 }>`
     top: 0;
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
+    width: 100%;
+    height: 100%;
+    min-height: 800px;
+    position: absolute;
     z-index: 10;
     background-color: ${props => props.visible ? "rgba(0, 0, 0, 0.8)" : "rgba(0, 0, 0, 0)"};
-    left: ${props => props.visible ? 0 : "100vw"};
+    left: ${props => props.visible ? 0 : "100%"};
     transition: background-color 500ms ease-in, left 100ms ease-in 500ms;
     display: flex;
     flex-direction: column;

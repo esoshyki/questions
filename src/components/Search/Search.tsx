@@ -54,6 +54,7 @@ const Search = () => {
                 visible={visible}
                 value={searchContext.value} 
                 onChange={e => searchContext.setValue(e.target.value)}
+                className="ui-ctl-inline"
                 />
             <SearchIcon 
                 onClick={() => setVisible(!visible)}

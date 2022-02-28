@@ -13,14 +13,18 @@ declare global {
     }
 };
 
-const AppWrapper = styled.div`
+const AppWrapper = styled.div<{
+    bitrix: boolean
+}>`
     width: 100%;
     max-width: 1000px;
     margin: auto;
-    height: 100%;
+    height: ${props => props.bitrix ? "100%" : "100vh"};
     * {
         box-sizing: border-box;
     };
+    position: relative;
+    overflow: hidden;
 `;
 
 const Questions = () => {
@@ -49,7 +53,7 @@ const Questions = () => {
     }, [loadingCTX, once])
 
     return (
-        <AppWrapper>
+        <AppWrapper bitrix={!!window.bxConfig?.sessid}>
             <Header />
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions}/> 
