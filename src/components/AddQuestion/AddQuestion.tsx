@@ -1,7 +1,7 @@
-import { useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import styled from "styled-components";
 import Icon from '../../assets/plus.png'
-import { AddQuestionContext } from "../../contexts";
+import { AddQuestionContext, LoadingContext } from "../../contexts";
 import { AddQuestionTextArea } from "./AddQuestionTextArea";
 import { theme } from "../../theme";
 import CheckBox from "./CheckBox";
@@ -80,12 +80,15 @@ const Button = styled.button`
 const AddQuestion = () => {
 
     const addQuestionCTX = useContext(AddQuestionContext);
+    const loadingCTX = useContext(LoadingContext);
 
     const [question, setQuestion] = useState<BitrixNewQuestion>({
         DETAIL_TEXT: "",
         NAME: ""
     });
     const [errors, setErrors] = useState<any[]>([]);
+    const [nameError, setNameError] = useState("");
+    const [textError, setTextError] = useState("");
 
     const onClick = () => {
         addQuestionCTX.setValue(false);
@@ -93,13 +96,22 @@ const AddQuestion = () => {
 
     const send = async () => {
         console.log('send');
+        if (!question.NAME) {
+            setNameError(content.addQuestion.errors.name);
+        };
+        if (!question.DETAIL_TEXT) {
+            setTextError(content.addQuestion.errors.text)
+        };
+        if (!question.DETAIL_TEXT || !question.NAME) {
+            return
+        };
+
+        loadingCTX.setValue(true);
         const sessId = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
         const response = await api.newQuestion(sessId, { 
             DETAIL_TEXT: question.DETAIL_TEXT,
             NAME: question.NAME
         });
-
-        console.log(response.data);
 
         if (response.data) {
             addQuestionCTX.setValue(false);
@@ -108,6 +120,7 @@ const AddQuestion = () => {
             setErrors(response.errors)
         };
 
+        loadingCTX.setValue(false);
     }
 
     const toggle = () => {
@@ -115,6 +128,22 @@ const AddQuestion = () => {
             ...question,
             USER_ID: question.USER_ID ? undefined : window.bxConfig?.sessid || "TESTid"
         })
+    }
+
+    const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        setTextError("");
+        setQuestion({
+            ...question,
+            DETAIL_TEXT: e.target.value
+        });
+    };
+
+    const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
+        setTextError("");
+        setQuestion({
+            ...question,
+            NAME: e.target.value
+        });
     }
 
     return (
@@ -127,28 +156,27 @@ const AddQuestion = () => {
                     {content.addQuestion.makeQuestion}
                 </AddQuestionTitle>
 
-                <AddQuestionLabel>
+                <AddQuestionLabel error={!!nameError}>
                     {content.addQuestion.name}
                 </AddQuestionLabel>
 
                 <AddQuestionName 
-                    value={question.NAME}
-                    onChange={e => setQuestion({
-                        ...question,
-                        NAME: e.target.value
-                    })}
+                    value={nameError ? nameError : question.NAME}
+                    onChange={onChangeName}
+                    error={!!nameError}
+                    onFocus={() => setNameError("")}
                     />
 
-                <AddQuestionLabel>
+                <AddQuestionLabel error={!!textError}>
                     {content.addQuestion.question}
                 </AddQuestionLabel>
 
                 <AddQuestionTextArea 
-                    value={question.DETAIL_TEXT} 
-                    onChange={e => setQuestion({
-                        ...question,
-                        DETAIL_TEXT: e.target.value
-                    })}/>
+                    error={!!textError}
+                    value={textError ? textError : question.DETAIL_TEXT} 
+                    onChange={onChangeText}
+                    onFocus={() => setTextError("")}
+                    />
 
                 <Button 
                     style={{position: "relative"}}

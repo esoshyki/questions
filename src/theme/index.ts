@@ -6,7 +6,8 @@ export const theme = {
         borderGray: "rgba(0, 0, 0, 0.2)",
         textGray: "rgba(0, 0, 0, 0.7)",
         pageHeaderBackground: "rgba(17,17,17,.85)",
-        green: "#4ad504"
+        green: "#4ad504",
+        error: "#ff5752"
     },
     fonts: {
         main: "Roboto,Open Sans,Helvetica Neue,sans-serif"

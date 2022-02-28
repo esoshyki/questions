@@ -44,7 +44,6 @@ const QuestionList = ({questions} : QuestionListProps) => {
    
     return (
         <QuestionListWrapper>
-            {loadingCtx.value && <Loading />}
 
             <QuestionListContainer>
                 {filteredQuestions.map((question, id) => {
