@@ -9,7 +9,7 @@ API
 #### Request
 
     params
-        Action: getSections,
+        action: getSections,
         sessId: string;
 
 #### Response
@@ -23,7 +23,7 @@ API
 #### Request
 
     params
-        Action: getListFaq,
+        action: getListFaq,
         sessId: string;
 
 #### Response
@@ -39,7 +39,7 @@ API
 #### Request
 
     params
-        Action: newQuestion,
+        action: newQuestion,
         sessId: string;
         body: 
             NAME: string;
