@@ -51,13 +51,13 @@ const SearchIcon = styled.div`
 
 const Search = () => {
 
-    const [visible, setVisible] = useState(false);
     const searchContext = useContext(SearchContext);
+    const visible = searchContext.visible;
 
     const ref = useRef<HTMLInputElement>(null);
 
     const handleClick = () => {
-        setVisible(!visible)
+        searchContext.setVisible(!visible)
     }
 
     const handleTransitionEnd = () => {
@@ -75,9 +75,11 @@ const Search = () => {
                 value={searchContext.value} 
                 onChange={e => searchContext.setValue(e.target.value)}
                 onTransitionEnd={handleTransitionEnd}
+                className="search-input"
                 />
             <SearchIcon 
                 onClick={handleClick}
+                className="search-button"
             />
         </SearchWrapper>
     )

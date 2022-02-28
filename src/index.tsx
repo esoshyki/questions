@@ -12,8 +12,9 @@ interface WrapperProps {
 }
 
 const ContextWrapper = ({ children }: WrapperProps) => {
-    const [loading, setLoading] = useState(false)
-    const [search, setSearch] = useState('')
+    const [loading, setLoading] = useState(false);
+    const [searchVisible, setSearchVisible] = useState(false);
+    const [search, setSearch] = useState('');
     const [showAddQuestion, setShowAddQuestion] = useState(false);
 
     const loadingValue: LoadingValue = {
@@ -23,7 +24,9 @@ const ContextWrapper = ({ children }: WrapperProps) => {
 
     const searchValue: SearchValue = {
         value: search,
+        visible: searchVisible,
         setValue: (value: string) => setSearch(value),
+        setVisible: (value: boolean) => setSearchVisible(value)
     }
 
     const addQuestionValue: AddQuestionValue = {

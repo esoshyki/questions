@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, MouseEvent } from "react";
 import styled from "styled-components";
 import { api } from "./api/api";
 import CategoriesElement from "./components/Categories/Categories";
 import Header from "./components/Layout/Header";
 import Loading from "./components/Loading";
-import { LoadingContext } from "./contexts";
+import { LoadingContext, SearchContext } from "./contexts";
 import { Question } from './types';
 
 declare global {
@@ -24,7 +24,7 @@ const AppWrapper = styled.div<{
         box-sizing: border-box;
     };
     position: relative;
-    overflow: hidden;
+    overflow-x: hidden;
 `;
 
 const Questions = () => {
@@ -32,6 +32,7 @@ const Questions = () => {
     const [questions, setQuestions] = useState<Question[]>([]);
     const [once, setOnce] = useState(false);
     const loadingCTX = useContext(LoadingContext);
+    const searchCTX = useContext(SearchContext);
 
     React.useEffect(() => {
 
@@ -50,10 +51,20 @@ const Questions = () => {
         }
 
 
-    }, [loadingCTX, once])
+    }, [loadingCTX, once]);
+
+    const onClick = (e: MouseEvent<HTMLDivElement>) => {
+        const target = e.target as Element;
+        if (!target.classList.contains("search-input") 
+            && !searchCTX.value
+            && !target.classList.contains("search-button")
+            ) {
+            searchCTX.setVisible(false)
+        }
+    };
 
     return (
-        <AppWrapper bitrix={!!window.bxConfig?.sessid}>
+        <AppWrapper bitrix={!!window.bxConfig?.sessid} onClick={e => onClick(e)}>
             <Header />
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions}/> 

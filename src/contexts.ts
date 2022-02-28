@@ -13,7 +13,9 @@ export const ResizeContext = createContext<ResizeValue>({
 
 export const SearchContext = createContext<SearchValue>({
     value: "",
-    setValue: (value: string) => {}
+    visible: false,
+    setValue: (value: string) => {},
+    setVisible: (value: boolean) => {}
 });
 
 export const AddQuestionContext = createContext<AddQuestionValue>({

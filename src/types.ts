@@ -34,8 +34,10 @@ export interface LoadingValue {
 }
 
 export interface SearchValue {
-    value: string,
+    value: string;
+    visible: boolean;
     setValue: (value: string) => void;
+    setVisible: (value: boolean) => void;
 }
 
 export interface AddQuestionValue {
