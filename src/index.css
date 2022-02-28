@@ -792,4 +792,15 @@ a.ui-btn-split:focus,
 
 .ui-link-dotted { border-bottom: 1px dotted var(--ui-link-border-color); }
 
+::-webkit-scrollbar {
+	width: 10px !important;
+}
+::-webkit-scrollbar-track {
+	background: #fff !important;        /* color of the tracking area */
+}
+::-webkit-scrollbar-thumb {
+	background: gray;
+	border: 1px solid #f2f2f2
+}
+
 /*endregion*/
