@@ -7,7 +7,7 @@ import AddQuestion from "./AddQuestion";
 
 export const ButtonWrapper = styled.button`
     /* background-color: ${theme.colors.green}; */
-    position: absolute;
+    position: absolute !important;
     right: 20px;
 `
 
