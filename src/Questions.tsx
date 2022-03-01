@@ -39,7 +39,7 @@ const Questions = () => {
 
         if (!once) {
 
-            const sessid = window.faqConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+            const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
 
             const getQuestions = async () => {
                 const newSections = await api.getSections(sessid);
