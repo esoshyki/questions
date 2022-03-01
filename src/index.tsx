@@ -16,6 +16,7 @@ const ContextWrapper = ({ children }: WrapperProps) => {
     const [searchVisible, setSearchVisible] = useState(false);
     const [search, setSearch] = useState('');
     const [showAddQuestion, setShowAddQuestion] = useState(false);
+    const [addQuestionResult, setAddQuestionResult] = useState("");
 
     const loadingValue: LoadingValue = {
         value: loading,
@@ -30,8 +31,10 @@ const ContextWrapper = ({ children }: WrapperProps) => {
     }
 
     const addQuestionValue: AddQuestionValue = {
-        value: showAddQuestion,
-        setValue: (value: boolean) => setShowAddQuestion(value)
+        show: showAddQuestion,
+        setShow: (value: boolean) => setShowAddQuestion(value),
+        result: addQuestionResult,
+        setResult: (value: string) => setAddQuestionResult(value)
     }
 
     return (

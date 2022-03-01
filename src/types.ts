@@ -61,13 +61,20 @@ export interface SearchValue {
 }
 
 export interface AddQuestionValue {
-    value: boolean;
-    setValue: (value: boolean) => void;
+    show: boolean;
+    setShow: (value: boolean) => void;
+    result: "success" | string;
+    setResult: (value: string) => void;
 }
 
 export type AddQuestionType = {
     text: string;
     id?: string;
+}
+
+export type AddQuestionResult = {
+    success?: string;
+    error?: string
 }
 
 

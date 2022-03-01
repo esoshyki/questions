@@ -19,7 +19,9 @@ export const SearchContext = createContext<SearchValue>({
 });
 
 export const AddQuestionContext = createContext<AddQuestionValue>({
-    value: false,
-    setValue: (value: boolean) => {}
+    show: false,
+    setShow: (value: boolean) => {},
+    result: "",
+    setResult: (value: string) => {}
 })
 

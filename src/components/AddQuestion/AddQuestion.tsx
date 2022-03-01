@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, Fragment, useContext, useState } from "react";
 import styled from "styled-components";
 import Icon from '../../assets/plus.png'
 import { AddQuestionContext, LoadingContext } from "../../contexts";
@@ -9,8 +9,9 @@ import { AddQuestionTitle } from "./AddQuestionTitle";
 import { BitrixNewQuestion } from "../../types";
 import { api } from "../../api/api";
 import { content } from "../../content";
-import { AddQuestionName } from "./AddQuestionName";
 import { AddQuestionLabel } from "./AddQuestionLabel";
+import AddQuestionResult from "./AddQuestionResult";
+
 
 const AddQuestionWrapper = styled.div<{
     visible: boolean
@@ -86,11 +87,11 @@ const AddQuestion = () => {
         QUESTION: "",
         PERSONAL: false
     });
-    const [errors, setErrors] = useState<any[]>([]);
+
     const [textError, setTextError] = useState("");
 
     const onClick = () => {
-        addQuestionCTX.setValue(false);
+        addQuestionCTX.setShow(false);
     }
 
     const send = async () => {
@@ -103,10 +104,11 @@ const AddQuestion = () => {
         const response = await api.newQuestion(sessid, question);
 
         if (response.data) {
-            addQuestionCTX.setValue(false);
+            addQuestionCTX.setShow(false);
+            addQuestionCTX.setResult(content.addQuestion.success);
         } 
         if (response.errors) {
-            setErrors(response.errors)
+            addQuestionCTX.setResult(response.errors[0])
         };
 
         loadingCTX.setValue(false);
@@ -127,12 +129,14 @@ const AddQuestion = () => {
         });
     };
 
-    return (
-        <AddQuestionWrapper visible={addQuestionCTX.value} className={errors.length ? "errors" : ""}>
+   return (
+
+      
+        <AddQuestionWrapper visible={addQuestionCTX.show} >
 
             <CloseIcon onClick={onClick}/>
 
-            <AddQuestionContent>
+           <AddQuestionContent>
                 <AddQuestionTitle>
                     {content.addQuestion.makeQuestion}
                 </AddQuestionTitle>

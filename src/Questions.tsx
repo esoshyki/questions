@@ -4,8 +4,9 @@ import { api } from "./api/api";
 import CategoriesElement from "./components/Categories/Categories";
 import Header from "./components/Layout/Header";
 import Loading from "./components/Loading";
-import { LoadingContext, SearchContext } from "./contexts";
+import { AddQuestionContext, LoadingContext, SearchContext } from "./contexts";
 import { BitrixQuestion, BitrixSection } from './types';
+import AddQuestionResult from './components/AddQuestion/AddQuestionResult';
 
 declare global {
     interface Window {
@@ -34,6 +35,7 @@ const Questions = () => {
     const [once, setOnce] = useState(false);
     const loadingCTX = useContext(LoadingContext);
     const searchCTX = useContext(SearchContext);
+    const questionsContext = useContext(AddQuestionContext)
 
     React.useEffect(() => {
 
@@ -70,6 +72,7 @@ const Questions = () => {
     return (
         <AppWrapper bitrix={!!window.faqConfig?.sessionId} onClick={e => onClick(e)}>
             <Header />
+            {questionsContext.result && <AddQuestionResult />}
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions} sections={sections}/> 
         </AppWrapper>

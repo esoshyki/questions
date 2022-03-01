@@ -17,7 +17,7 @@ const AddQuestionButton = () => {
     const addQuestionContext = useContext(AddQuestionContext);
 
     const click = () => {
-        addQuestionContext.setValue(true);
+        addQuestionContext.setShow(true);
     }
 
     return (
