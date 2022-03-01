@@ -27,7 +27,7 @@ const CategoriesElement = ({ questions, sections } : CategoriesProps) => {
 
             <Fragment>
                 {
-                    sections.map((section, id) => {
+                    sections && sections.map((section, id) => {
                         return (
                             <Fragment key={id}>
                                 <Category 

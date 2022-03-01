@@ -87,7 +87,6 @@ const AddQuestion = () => {
         NAME: ""
     });
     const [errors, setErrors] = useState<any[]>([]);
-    const [nameError, setNameError] = useState("");
     const [textError, setTextError] = useState("");
 
     const onClick = () => {
@@ -96,9 +95,6 @@ const AddQuestion = () => {
 
     const send = async () => {
         console.log('send');
-        if (!question.NAME) {
-            setNameError(content.addQuestion.errors.name);
-        };
         if (!question.DETAIL_TEXT) {
             setTextError(content.addQuestion.errors.text)
         };
@@ -138,14 +134,6 @@ const AddQuestion = () => {
         });
     };
 
-    const onChangeName = (e: ChangeEvent<HTMLInputElement>) => {
-        setTextError("");
-        setQuestion({
-            ...question,
-            NAME: e.target.value
-        });
-    }
-
     return (
         <AddQuestionWrapper visible={addQuestionCTX.value} className={errors.length ? "errors" : ""}>
 
@@ -155,17 +143,6 @@ const AddQuestion = () => {
                 <AddQuestionTitle>
                     {content.addQuestion.makeQuestion}
                 </AddQuestionTitle>
-
-                <AddQuestionLabel error={!!nameError}>
-                    {content.addQuestion.name}
-                </AddQuestionLabel>
-
-                <AddQuestionName 
-                    value={nameError ? nameError : question.NAME}
-                    onChange={onChangeName}
-                    error={!!nameError}
-                    onFocus={() => setNameError("")}
-                    />
 
                 <AddQuestionLabel error={!!textError}>
                     {content.addQuestion.question}

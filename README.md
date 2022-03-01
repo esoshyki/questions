@@ -42,7 +42,6 @@ API
         action: newQuestion,
         sessid: string;
         body: 
-            NAME: string;
             DETAIL_TEXT: string;
             USER_ID?: string;
 
