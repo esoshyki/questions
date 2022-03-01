@@ -9,7 +9,7 @@ import { BitrixQuestion, BitrixSection } from './types';
 
 declare global {
     interface Window {
-      faqConfig: { sessid: string; };
+      faqConfig: { sessionId: string; };
     }
 };
 
