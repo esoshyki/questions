@@ -1,8 +1,6 @@
 import styled from "styled-components";
-import { content } from "../../content";
-import { theme } from "../../theme";
 import AddQuestionButton from "../AddQuestion/AddQuestionButton";
-import PageTitle from "./PageTitle";
+import Search from "../Search";
 
 const HeaderWrapper = styled.div`
     width: 100%;
@@ -11,7 +9,6 @@ const HeaderWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    background-color: ${theme.colors.pageHeaderBackground};
     position: relative;
 `;
 
@@ -19,10 +16,7 @@ const Header = () => {
 
     return (
         <HeaderWrapper>
-            <PageTitle>
-                {content.header.title}
-            </PageTitle>
-
+            <Search />
             <AddQuestionButton />
         </HeaderWrapper>
     )

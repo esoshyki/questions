@@ -8,7 +8,7 @@ const SearchWrapper = styled.div`
     top: 20px;
     height: 40px;
     width: 400px;
-    right: 0;
+    left: 0;
     align-self: flex-end;
     display: flex;
     flex-direction: column;
@@ -23,7 +23,7 @@ const SearchInput = styled.input<{
 }>`
     position: absolute;
     width: calc(100% - 50px);
-    right: ${props => props.visible ? 0 : "calc(-100% - 50px)"};
+    right: 0;
     transition: right 200ms ease-in;
     border: none;
     border-bottom: 2px solid black;

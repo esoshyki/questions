@@ -9,6 +9,7 @@ export const ButtonWrapper = styled.button`
     /* background-color: ${theme.colors.green}; */
     position: absolute !important;
     right: 20px;
+    top: 20px;
 `
 
 const AddQuestionButton = () => {

@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import styled from "styled-components";
 import { BitrixQuestion, BitrixSection } from "../../types";
-import Search from "../Search";
 import Category from "./Category";
 
 const CategoriesWrapper = styled.div`
@@ -22,8 +21,6 @@ const CategoriesElement = ({ questions, sections } : CategoriesProps) => {
 
     return (
         <CategoriesWrapper>
-
-            <Search />
 
             <Fragment>
                 {
