@@ -83,8 +83,8 @@ const AddQuestion = () => {
     const loadingCTX = useContext(LoadingContext);
 
     const [question, setQuestion] = useState<BitrixNewQuestion>({
-        DETAIL_TEXT: "",
-        NAME: ""
+        QUESTION: "",
+        PERSONAL: false
     });
     const [errors, setErrors] = useState<any[]>([]);
     const [textError, setTextError] = useState("");
@@ -94,20 +94,13 @@ const AddQuestion = () => {
     }
 
     const send = async () => {
-        console.log('send');
-        if (!question.DETAIL_TEXT) {
-            setTextError(content.addQuestion.errors.text)
-        };
-        if (!question.DETAIL_TEXT || !question.NAME) {
-            return
+        if (!question.QUESTION) {
+            return setTextError(content.addQuestion.errors.text)
         };
 
         loadingCTX.setValue(true);
         const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
-        const response = await api.newQuestion(sessid, { 
-            DETAIL_TEXT: question.DETAIL_TEXT,
-            NAME: question.NAME
-        });
+        const response = await api.newQuestion(sessid, question);
 
         if (response.data) {
             addQuestionCTX.setValue(false);
@@ -122,7 +115,7 @@ const AddQuestion = () => {
     const toggle = () => {
         setQuestion({
             ...question,
-            USER_ID: question.USER_ID ? undefined : window.faqConfig?.sessionId || "TESTid"
+            PERSONAL: question.PERSONAL ? false : true
         })
     }
 
@@ -130,7 +123,7 @@ const AddQuestion = () => {
         setTextError("");
         setQuestion({
             ...question,
-            DETAIL_TEXT: e.target.value
+            QUESTION: e.target.value
         });
     };
 
@@ -150,7 +143,7 @@ const AddQuestion = () => {
 
                 <AddQuestionTextArea 
                     error={!!textError}
-                    value={textError ? textError : question.DETAIL_TEXT} 
+                    value={textError ? textError : question.QUESTION} 
                     onChange={onChangeText}
                     onFocus={() => setTextError("")}
                     />
@@ -162,7 +155,7 @@ const AddQuestion = () => {
                     {content.addQuestion.send}
                 </Button>
 
-                <CheckBox checked={Boolean(question.USER_ID)} toggle={toggle}/>
+                <CheckBox checked={question.PERSONAL} toggle={toggle}/>
                 
             </AddQuestionContent>
 

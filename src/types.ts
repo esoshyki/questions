@@ -23,9 +23,8 @@ export type BitrixQuestion = {
 };
 
 export type BitrixNewQuestion = {
-    NAME: string;
-    DETAIL_TEXT: string;
-    USER_ID?: string;
+    QUESTION: string;
+    PERSONAL: boolean;
 }
 
 export type BitrixSection = {
