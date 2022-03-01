@@ -81,6 +81,7 @@ const Search = () => {
                 onChange={e => searchContext.setValue(e.target.value)}
                 onTransitionEnd={handleTransitionEnd}
                 className="search-input"
+                placeholder="Быстрый поиск..."
                 />
             <SearchIcon 
                 onClick={handleClick}

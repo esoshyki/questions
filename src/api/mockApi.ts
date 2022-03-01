@@ -86,8 +86,6 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
             return [200, {data: true}]
         }
 
-        console.log(config.data)
-
         const data = JSON.parse(config.data);
 
         const match: string = data.data.fields.query;
