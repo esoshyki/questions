@@ -42,9 +42,7 @@ const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
 const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Promise<BitrixResponse> => {
     try {
         const response: AxiosResponse = await instanceAPI.post("/", qs.stringify({
-            data: {
-                fields: question
-            }
+            fields: question
         }), {
             params: {
                 action: ApiActions.NewQuestion,
@@ -71,17 +69,11 @@ const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Pro
 
 const search = async (query: string, sessionID: string) : Promise<BitrixQuestion[]> => {
     try {
-        const response: AxiosResponse = await instanceAPI.post("/", {
-            data: {
-                fields: {
-                    query: query
-                }
-            }
-        },
-        {
+        const response: AxiosResponse = await instanceAPI.get("/", {
             params: {
                 action: ApiActions.Search,
-                sessionID: sessionID,
+                sessid: sessionID,
+                q: query
             }
         });
 
