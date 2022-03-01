@@ -68,7 +68,7 @@ const Questions = () => {
     };
 
     return (
-        <AppWrapper bitrix={!!window.faqConfig?.sessid} onClick={e => onClick(e)}>
+        <AppWrapper bitrix={!!window.faqConfig?.sessionId} onClick={e => onClick(e)}>
             <Header />
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions} sections={sections}/> 
