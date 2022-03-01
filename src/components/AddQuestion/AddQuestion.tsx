@@ -1,4 +1,4 @@
-import { ChangeEvent, Fragment, useContext, useState } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import styled from "styled-components";
 import Icon from '../../assets/plus.png'
 import { AddQuestionContext, LoadingContext } from "../../contexts";
@@ -10,7 +10,6 @@ import { BitrixNewQuestion } from "../../types";
 import { api } from "../../api/api";
 import { content } from "../../content";
 import { AddQuestionLabel } from "./AddQuestionLabel";
-import AddQuestionResult from "./AddQuestionResult";
 
 
 const AddQuestionWrapper = styled.div<{

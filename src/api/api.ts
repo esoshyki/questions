@@ -39,10 +39,11 @@ const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
 };
 
 const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Promise<BitrixResponse> => {
-    console.log(question);
     try {
         const response: AxiosResponse = await instanceAPI.post("/", {
-            data: question
+            data: {
+                fields: question
+            }
         }, {
             params: {
                 action: ApiActions.NewQuestion,
