@@ -2,6 +2,7 @@ import { useContext, useRef } from "react";
 import styled from "styled-components";
 import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
+import { api } from "../../api/api";
 
 const SearchWrapper = styled.div`
     position: absolute;
@@ -54,10 +55,14 @@ const Search = () => {
     const searchContext = useContext(SearchContext);
     const visible = searchContext.visible;
 
+    const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
+
     const ref = useRef<HTMLInputElement>(null);
 
-    const handleClick = () => {
-        searchContext.setVisible(!visible)
+    const handleClick = async () => {
+        if (!ref.current?.value) return;
+        const questions = await api.search(ref.current.value, sessid);
+        console.log(questions);
     }
 
     const handleTransitionEnd = () => {

@@ -80,8 +80,26 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
         }
     }).reply(200, { data: sections})
 
-    mock.onPost("/").reply(200, {
-        data: true
+    mock.onPost("/").reply(config => {
+
+        if (config.params.action === ApiActions.NewQuestion) {
+            return [200, {data: true}]
+        }
+
+        console.log(config.data)
+
+        const data = JSON.parse(config.data);
+
+        const match: string = data.data.fields.query;
+
+        console.log(match);
+
+        const result = questions.filter(question => {
+            return (
+            new RegExp(match.toLowerCase()).test(question.DETAIL_TEXT.toLowerCase()) || 
+            new RegExp(match.toLowerCase()).test(question.NAME.toLowerCase()))})
+
+        return [200, { data: result }]
     })
 
     return mock
