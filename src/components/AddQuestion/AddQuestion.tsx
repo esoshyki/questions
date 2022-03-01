@@ -103,7 +103,7 @@ const AddQuestion = () => {
         };
 
         loadingCTX.setValue(true);
-        const sessid = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+        const sessid = window.faqConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
         const response = await api.newQuestion(sessid, { 
             DETAIL_TEXT: question.DETAIL_TEXT,
             NAME: question.NAME
@@ -122,7 +122,7 @@ const AddQuestion = () => {
     const toggle = () => {
         setQuestion({
             ...question,
-            USER_ID: question.USER_ID ? undefined : window.bxConfig?.sessid || "TESTid"
+            USER_ID: question.USER_ID ? undefined : window.faqConfig?.sessid || "TESTid"
         })
     }
 

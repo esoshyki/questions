@@ -9,7 +9,7 @@ import { BitrixQuestion, BitrixSection } from './types';
 
 declare global {
     interface Window {
-      bxConfig: { sessid: string; };
+      faqConfig: { sessid: string; };
     }
 };
 
@@ -39,7 +39,7 @@ const Questions = () => {
 
         if (!once) {
 
-            const sessid = window.bxConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
+            const sessid = window.faqConfig?.sessid || "e14e316cb5cbcae4320a834ebb234f56";
 
             const getQuestions = async () => {
                 const newSections = await api.getSections(sessid);
@@ -68,7 +68,7 @@ const Questions = () => {
     };
 
     return (
-        <AppWrapper bitrix={!!window.bxConfig?.sessid} onClick={e => onClick(e)}>
+        <AppWrapper bitrix={!!window.faqConfig?.sessid} onClick={e => onClick(e)}>
             <Header />
             {loadingCTX.value && <Loading />}
             <CategoriesElement questions={questions} sections={sections}/> 
