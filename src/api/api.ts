@@ -51,7 +51,10 @@ const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Pro
                 sessid: sessionId
             },
             headers: {
-                "Content-Type" : "application/x-www-form-urlencoded'"
+                "Content-Type" : "application/x-www-form-urlencoded",
+                charset: "UTF-8",
+                "X-Requested-With" : "XMLHttpRequest",
+                Accept: "*/*"
             }
         });
 
