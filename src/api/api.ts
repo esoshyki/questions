@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
-import { ApiActions, BitrixNewQuestion, BitrixQuestion, BitrixResponse, BitrixSection } from "../types";
+import { ApiActions, NewQuestion, Question, BitrixResponse, Section } from "../types";
 import instanceAPI from "./instance";
 import qs from 'qs';
 
-const getQuestions = async (sessionId: string) : Promise<BitrixQuestion[]> => {
+const getQuestions = async (sessionId: string) : Promise<Question[]> => {
     try {
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: { 
@@ -14,14 +14,14 @@ const getQuestions = async (sessionId: string) : Promise<BitrixQuestion[]> => {
 
         const bitrixResponse: BitrixResponse = response.data;
 
-        const questions: BitrixQuestion[] = bitrixResponse.data;
+        const questions: Question[] = bitrixResponse.data;
         return questions
     } catch (error) {
         return []
     }
 };
 
-const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
+const getSections = async (sessionId: string) : Promise<Section[]> => {
     try {
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: {
@@ -32,14 +32,14 @@ const getSections = async (sessionId: string) : Promise<BitrixSection[]> => {
 
         const bitrixResponse: BitrixResponse = response.data;
 
-        const sections: BitrixSection[] = bitrixResponse.data;
+        const sections: Section[] = bitrixResponse.data;
         return sections
     } catch (error) {
         return []
     }
 };
 
-const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Promise<BitrixResponse> => {
+const newQuestion = async (sessionId: string, question: NewQuestion) : Promise<BitrixResponse> => {
     try {
         const response: AxiosResponse = await instanceAPI.post("/", qs.stringify({
             fields: question
@@ -56,8 +56,8 @@ const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Pro
             }
         });
 
-        const data: BitrixResponse = response.data;
-        return data;
+        const bitrixResponse: BitrixResponse = response.data;
+        return bitrixResponse;
     } catch (error: any) {
         return {
             data: false,
@@ -67,8 +67,10 @@ const newQuestion = async (sessionId: string, question: BitrixNewQuestion) : Pro
     }
 }
 
-const search = async (query: string, sessionID: string) : Promise<BitrixQuestion[]> => {
+const search = async (query: string, sessionID: string) : Promise<Question[]> => {
     try {
+        console.log(`query`, query);
+        console.log("sessid", sessionID);
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: {
                 action: ApiActions.Search,
@@ -77,9 +79,11 @@ const search = async (query: string, sessionID: string) : Promise<BitrixQuestion
             }
         });
 
+        console.log(response);
+
         const bitrixResponse: BitrixResponse = response.data;
 
-        const questions : BitrixQuestion[] = bitrixResponse.data;
+        const questions : Question[] = bitrixResponse.data;
 
         return questions;
 

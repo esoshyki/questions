@@ -1,15 +1,15 @@
 import { ChangeEvent, useContext, useState } from "react";
 import styled from "styled-components";
 import Icon from '../../assets/plus.png'
-import { AddQuestionContext, LoadingContext } from "../../contexts";
 import { AddQuestionTextArea } from "./AddQuestionTextArea";
 import { theme } from "../../theme";
 import CheckBox from "./CheckBox";
 import { AddQuestionTitle } from "./AddQuestionTitle";
-import { BitrixNewQuestion } from "../../types";
-import { api } from "../../api/api";
 import { content } from "../../content";
 import { AddQuestionLabel } from "./AddQuestionLabel";
+import { useDispatch, useSelector } from "react-redux";
+import { select } from "../../store/selector";
+import { addQuestionRequest, setQuestionText, setShowAddQuestion, toggleQuestionPersonal } from "../../store/addquestion/addquestion.actions";
 
 
 const AddQuestionWrapper = styled.div<{
@@ -79,59 +79,46 @@ const Button = styled.button`
 
 const AddQuestion = () => {
 
-    const addQuestionCTX = useContext(AddQuestionContext);
-    const loadingCTX = useContext(LoadingContext);
+    const dispatch = useDispatch();
 
-    const [question, setQuestion] = useState<BitrixNewQuestion>({
-        QUESTION: "",
-        PERSONAL: false
-    });
+    const QUESTION = useSelector(select.addQuestion.questionsText);
+    const PERSONAL = useSelector(select.addQuestion.questionPersonal);
+    const show = useSelector(select.addQuestion.show)
 
     const [textError, setTextError] = useState("");
+    const [formErrors, setFormErrors] = useState(false);
 
     const onClick = () => {
-        addQuestionCTX.setShow(false);
+        dispatch(setShowAddQuestion(false))
     }
 
     const send = async () => {
-        if (!question.QUESTION) {
+        const sessionId = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
+
+        if (!QUESTION && formErrors) {
             return setTextError(content.addQuestion.errors.text)
-        };
-
-        loadingCTX.setValue(true);
-        const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
-        const response = await api.newQuestion(sessid, question);
-
-        if (response.data) {
-            addQuestionCTX.setShow(false);
-            addQuestionCTX.setResult(content.addQuestion.success);
-        } 
-        if (response.errors) {
-            addQuestionCTX.setResult(response.errors[0])
-        };
-
-        loadingCTX.setValue(false);
+        } else {
+            dispatch(addQuestionRequest(sessionId, {
+                QUESTION,
+                PERSONAL
+            }))
+        }
+        
     }
 
     const toggle = () => {
-        setQuestion({
-            ...question,
-            PERSONAL: question.PERSONAL ? false : true
-        })
+        dispatch(toggleQuestionPersonal());
     }
 
     const onChangeText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        setTextError("");
-        setQuestion({
-            ...question,
-            QUESTION: e.target.value
-        });
+        setFormErrors(false);
+        dispatch(setQuestionText(e.target.value))
     };
 
    return (
 
       
-        <AddQuestionWrapper visible={addQuestionCTX.show} >
+        <AddQuestionWrapper visible={show} >
 
             <CloseIcon onClick={onClick}/>
 
@@ -146,7 +133,7 @@ const AddQuestion = () => {
 
                 <AddQuestionTextArea 
                     error={!!textError}
-                    value={textError ? textError : question.QUESTION} 
+                    value={textError ? textError : QUESTION} 
                     onChange={onChangeText}
                     onFocus={() => setTextError("")}
                     />
@@ -158,7 +145,7 @@ const AddQuestion = () => {
                     {content.addQuestion.send}
                 </Button>
 
-                <CheckBox checked={question.PERSONAL} toggle={toggle}/>
+                <CheckBox checked={PERSONAL} toggle={toggle}/>
                 
             </AddQuestionContent>
 

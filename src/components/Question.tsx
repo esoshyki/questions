@@ -1,11 +1,11 @@
 import React from "react";
-import { BitrixQuestion } from "../types";
+import { Question } from "../types";
 import Accordion from "./Accordion";
 import styled from 'styled-components'
 import { theme } from "../theme";
 
 interface QuestionItemProps {
-    question: BitrixQuestion;
+    question: Question;
 };
 
 const Content = styled.p`

@@ -1,8 +1,10 @@
 import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
 import styled from "styled-components";
-import { ResizeContext } from "../../contexts";
 import { theme } from "../../theme";
 import PlusIcon from '../../assets/plus.png'
+import { useDispatch, useSelector } from "react-redux";
+import { select } from "../../store/selector";
+import { setResize } from "../../store/view/view.actions";
 
 const Container = styled.div`
     width: 100%;
@@ -99,11 +101,13 @@ const Accordion = ({ children, backgroundColor, color, headerText, parent } : {
     headerText: string;
     parent?: true
 }) => {
+
+    const dispatch = useDispatch();
  
     const [visibleHeight, setVisibleHeight] = useState(0);
     const ref = useRef<HTMLDivElement>(null);
 
-    const resizeCtx = useContext(ResizeContext);
+    const resize = useSelector(select.view.resize);
 
     const onClick = () => {
         if (visibleHeight) {
@@ -115,20 +119,20 @@ const Accordion = ({ children, backgroundColor, color, headerText, parent } : {
 
     const onTransitionEnd = () => {
         if (!parent) {
-            resizeCtx.setValue(true);
+            dispatch(setResize(true))
         }
     };
 
     useEffect(() => {
-        if (resizeCtx.value) {
+        if (resize) {
             if (parent) {
                 if (typeof ref.current?.offsetHeight === "number") {
                     setVisibleHeight(ref.current.offsetHeight);
-                    resizeCtx.setValue(false);
+                    dispatch(setResize(false));
                 }
             }
         }
-    }, [resizeCtx, parent])
+    }, [resize, parent, dispatch]);
 
     return (
         <Container >

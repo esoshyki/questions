@@ -1,6 +1,8 @@
 import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { AddQuestionContext } from "../../contexts";
+import { setAddQuestionResult, setShowAddQuestion } from "../../store/addquestion/addquestion.actions";
+import { select } from "../../store/selector";
 import { theme } from "../../theme";
 
 const Wrapper = styled.div`
@@ -21,15 +23,21 @@ const Wrapper = styled.div`
 
 const AddQuestionResult = () => {
 
-    const context = useContext(AddQuestionContext);
-    const result = context.result;
+    const dispatch = useDispatch();
+
+    const result = useSelector(select.addQuestion.result);
+
+    const handleClick = () => {
+        dispatch(setAddQuestionResult(""));
+        dispatch(setShowAddQuestion(false));
+    }
 
     return (
         <Wrapper>
             <p>{result}</p>
 
             <button 
-                onClick={() => context.setResult("")}
+                onClick={handleClick}
                 className="ui-btn">
                 OK
             </button>

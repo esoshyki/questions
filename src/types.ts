@@ -1,35 +1,49 @@
-export enum Categories {
-    jobInCompany = "Работа в компании",
-    docs = "Работа с документами"
-};
+export type RAction = {
+    payload?: any,
+    type: string;
+}
 
-export const categories = {
-    jobInCompany: Categories.jobInCompany,
-    docs: Categories.docs
-};
+export type ViewState = {
+    loading: boolean;
+    resize: boolean;
+}
 
 export type Question = {
-    header: string;
-    body: string;
-    chapter: Categories;
-};
-
-export type BitrixQuestion = {
     ID: number,
     IBLOCK_SECTION_ID: number,
     NAME: string;
     DETAIL_TEXT: string;
-    DETAIL_TYPE: string;
-};
+    DETAIL_TYPE: string;  
+}
 
-export type BitrixNewQuestion = {
+export type NewQuestion = {
     QUESTION: string;
     PERSONAL: boolean;
 }
 
-export type BitrixSection = {
+export type Section = {
     ID: number;
     NAME: string;
+}
+
+export type QuestionsState = {
+    sections: Section[];
+    questions: Question[];
+    loading: boolean;
+    searchQuery: string;
+};
+
+export type AddQuestionState = {
+    show: boolean;
+    data: NewQuestion,
+    result: string;
+    loading: boolean;
+};
+
+export type State = {
+    questions: QuestionsState,
+    view: ViewState,
+    addQuestion: AddQuestionState
 }
 
 export type BitrixResponse = {
@@ -45,38 +59,13 @@ export enum ApiActions {
     Search = "search"
 }
 
-export type IState = {
-    loading: boolean,
-  };
-  
-export interface LoadingValue {
-    value: boolean,
-    setValue: (value: boolean) => void;
+// // // // // // // 
+export enum Categories {
+    jobInCompany = "Работа в компании",
+    docs = "Работа с документами"
 }
 
-export interface SearchValue {
-    value: string;
-    visible: boolean;
-    setValue: (value: string) => void;
-    setVisible: (value: boolean) => void;
+export const categories = {
+    jobInCompany: Categories.jobInCompany,
+    docs: Categories.docs
 }
-
-export interface AddQuestionValue {
-    show: boolean;
-    setShow: (value: boolean) => void;
-    result: "success" | string;
-    setResult: (value: string) => void;
-}
-
-export type AddQuestionType = {
-    text: string;
-    id?: string;
-}
-
-export type AddQuestionResult = {
-    success?: string;
-    error?: string
-}
-
-
-export interface ResizeValue extends LoadingValue {}

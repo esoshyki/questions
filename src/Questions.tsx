@@ -1,12 +1,13 @@
-import React, { useContext, useState, MouseEvent } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
-import { api } from "./api/api";
 import CategoriesElement from "./components/Categories/Categories";
 import Header from "./components/Layout/Header";
 import Loading from "./components/Loading";
-import { AddQuestionContext, LoadingContext, SearchContext } from "./contexts";
-import { BitrixQuestion, BitrixSection } from './types';
 import AddQuestionResult from './components/AddQuestion/AddQuestionResult';
+import { useDispatch, useSelector } from 'react-redux';
+import { getQuestions, getSections } from "./store/questions/questions.action";
+import { fakeSessionId } from "./api/mockApi";
+import { select } from "./store/selector";
 
 declare global {
     interface Window {
@@ -30,51 +31,30 @@ const AppWrapper = styled.div<{
 
 const Questions = () => {
 
-    const [questions, setQuestions] = useState<BitrixQuestion[]>([]);
-    const [sections, setSections] = useState<BitrixSection[]>([]);
-    const [once, setOnce] = useState(false);
-    const loadingCTX = useContext(LoadingContext);
-    const searchCTX = useContext(SearchContext);
-    const questionsContext = useContext(AddQuestionContext)
+    const sessionId = window.faqConfig?.sessionId || fakeSessionId;
 
-    React.useEffect(() => {
+    const dispatch = useDispatch();
 
-        if (!once) {
+    const sections = useSelector(select.questions.sections);
+    const result = useSelector(select.addQuestion.result);
+    const loading = useSelector(select.questions.loading);
 
-            const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
+    useEffect(() => {
+        dispatch(getSections(sessionId))
+    }, [dispatch, sessionId]);
 
-            const getQuestions = async () => {
-                const newSections = await api.getSections(sessid);
-                setSections(newSections);
-
-                const newQuestion = await api.getQuestions(sessid);
-                setQuestions(newQuestion)
-                loadingCTX.setValue(false);
-            }
-
-            loadingCTX.setValue(true);
-            getQuestions();
-            setOnce(true);
+    useEffect(() => {
+        if (sections.length) {
+            dispatch(getQuestions(sessionId))
         }
-
-    }, [loadingCTX, once]);
-
-    const onClick = (e: MouseEvent<HTMLDivElement>) => {
-        const target = e.target as Element;
-        if (!target.classList.contains("search-input") 
-            && !searchCTX.value
-            && !target.classList.contains("search-button")
-            ) {
-            searchCTX.setVisible(false)
-        }
-    };
+    }, [dispatch, sessionId, sections]);
 
     return (
-        <AppWrapper bitrix={!!window.faqConfig?.sessionId} onClick={e => onClick(e)}>
+        <AppWrapper bitrix={!!window.faqConfig?.sessionId} >
             <Header />
-            {questionsContext.result && <AddQuestionResult />}
-            {loadingCTX.value && <Loading />}
-            <CategoriesElement questions={questions} sections={sections}/> 
+            {result && <AddQuestionResult />}
+            {loading && <Loading />}
+            <CategoriesElement /> 
         </AppWrapper>
     )
 };

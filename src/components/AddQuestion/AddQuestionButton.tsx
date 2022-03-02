@@ -1,6 +1,7 @@
 import { Fragment, useContext } from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { AddQuestionContext } from "../../contexts";
+import { setShowAddQuestion } from "../../store/addquestion/addquestion.actions";
 import { theme } from "../../theme";
 import AddQuestion from "./AddQuestion";
 
@@ -14,10 +15,10 @@ export const ButtonWrapper = styled.button`
 
 const AddQuestionButton = () => {
 
-    const addQuestionContext = useContext(AddQuestionContext);
+    const dispatch = useDispatch();
 
     const click = () => {
-        addQuestionContext.setShow(true);
+        dispatch(setShowAddQuestion(true))
     }
 
     return (

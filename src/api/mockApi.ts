@@ -1,15 +1,15 @@
 import { AxiosInstance } from "axios";
 import MockAdapter from "axios-mock-adapter";
-import { ApiActions, BitrixQuestion, BitrixSection } from "../types";
+import { ApiActions, Question, Section } from "../types";
 
 const BXparams = {
     c: "manao:support.faq",
     mode: "class",
   };
 
-const sessionId = "e14e316cb5cbcae4320a834ebb234f56";
+export const fakeSessionId = "e14e316cb5cbcae4320a834ebb234f56";
 
-const questions: BitrixQuestion[] = [
+const questions: Question[] = [
     {
         ID: 495,
         IBLOCK_SECTION_ID: 275,
@@ -47,7 +47,7 @@ const questions: BitrixQuestion[] = [
     }
 ]
 
-const sections: BitrixSection[] = [
+const sections: Section[] = [
     {
         ID: 275,
         NAME: "Работа в компании",
@@ -69,36 +69,38 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
     mock.onGet("/", {
         params: {
             ...BXparams, action: ApiActions.Questions,
-            sessid: sessionId
+            sessid: fakeSessionId
         }
     }).reply(200, {data: questions});
 
     mock.onGet("/", {
         params: {
             ...BXparams, action: ApiActions.Sections,
-            sessid: sessionId
+            sessid: fakeSessionId
         }
-    }).reply(200, { data: sections})
+    }).reply(200, { data: sections});
 
-    mock.onPost("/").reply(config => {
-
-        if (config.params.action === ApiActions.NewQuestion) {
-            return [200, {data: true}]
+    mock.onGet("/", {
+        params: {
+            ...BXparams, action: ApiActions.Search,
+            sessid: fakeSessionId,
+            q: 'кар'
         }
+    }).reply(function(config) {
 
-        const data = JSON.parse(config.data);
+        console.log(config.params.q);
 
-        const match: string = data.data.fields.query;
+        console.log(questions.filter(question => question.DETAIL_TEXT.toLowerCase().match(config.params.q)))
 
-        console.log(match);
+        return [
+            200, {
+                data: questions.filter(question => question.DETAIL_TEXT.toLowerCase().match(config.params.q))}
+        ]
+    });
 
-        const result = questions.filter(question => {
-            return (
-            new RegExp(match.toLowerCase()).test(question.DETAIL_TEXT.toLowerCase()) || 
-            new RegExp(match.toLowerCase()).test(question.NAME.toLowerCase()))})
+    mock.onPost("/").reply(200, { data: true })
 
-        return [200, { data: result }]
-    })
+    console.log(mock);
 
     return mock
 };

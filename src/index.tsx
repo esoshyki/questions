@@ -1,57 +1,16 @@
+import React from 'react'
 import reportWebVitals from './reportWebVitals'
-import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 import Questions from './Questions'
-import { AddQuestionContext, LoadingContext, SearchContext } from './contexts'
-import { ReactNode } from 'react'
-import { AddQuestionValue, LoadingValue, SearchValue } from './types'
-import './index.css'
-
-interface WrapperProps {
-    children: ReactNode
-}
-
-const ContextWrapper = ({ children }: WrapperProps) => {
-    const [loading, setLoading] = useState(false);
-    const [searchVisible, setSearchVisible] = useState(false);
-    const [search, setSearch] = useState('');
-    const [showAddQuestion, setShowAddQuestion] = useState(false);
-    const [addQuestionResult, setAddQuestionResult] = useState("");
-
-    const loadingValue: LoadingValue = {
-        value: loading,
-        setValue: (value: boolean) => setLoading(value),
-    }
-
-    const searchValue: SearchValue = {
-        value: search,
-        visible: searchVisible,
-        setValue: (value: string) => setSearch(value),
-        setVisible: (value: boolean) => setSearchVisible(value)
-    }
-
-    const addQuestionValue: AddQuestionValue = {
-        show: showAddQuestion,
-        setShow: (value: boolean) => setShowAddQuestion(value),
-        result: addQuestionResult,
-        setResult: (value: string) => setAddQuestionResult(value)
-    }
-
-    return (
-        <LoadingContext.Provider value={loadingValue}>
-            <SearchContext.Provider value={searchValue}>
-                <AddQuestionContext.Provider value={addQuestionValue}>
-                    {children}
-                </AddQuestionContext.Provider>
-            </SearchContext.Provider>
-        </LoadingContext.Provider>
-    )
-}
+import './index.css';
+import { Provider } from "react-redux";
+import { store } from './store';
 
 ReactDOM.render(
-    <ContextWrapper>
+    <Provider store={store}>
         <Questions />
-    </ContextWrapper>,
+    </Provider>,       
     document.getElementById('root')
-)
+);
+
 reportWebVitals()

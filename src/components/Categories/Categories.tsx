@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { BitrixQuestion, BitrixSection } from "../../types";
+import { select } from "../../store/selector";
 import Category from "./Category";
 
 const CategoriesWrapper = styled.div`
@@ -12,25 +13,26 @@ const CategoriesWrapper = styled.div`
     position: relative;
 `;
 
-interface CategoriesProps {
-    questions: BitrixQuestion[];
-    sections: BitrixSection[];
-}
+const CategoriesElement = () => {
 
-const CategoriesElement = ({ questions, sections } : CategoriesProps) => {
+    const sections = useSelector(select.questions.sections);
+    const questions = useSelector(select.questions.questions);
 
     return (
         <CategoriesWrapper>
 
             <Fragment>
                 {
-                    sections && sections.map((section, id) => {
+                    !!sections && !!questions && sections.map((section, id) => {
+
+                        const categoryQuestion = questions.filter(question => question.IBLOCK_SECTION_ID === section.ID);
+
                         return (
                             <Fragment key={id}>
-                                <Category 
-                                    questions={questions.filter(question => question.IBLOCK_SECTION_ID === section.ID)}
-                                    category={section.NAME}
-                                />
+                                {!!categoryQuestion.length && <Category 
+                                    questions={categoryQuestion}
+                                    name={section.NAME}
+                                />}
                             </Fragment>
                         )
                     })

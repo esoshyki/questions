@@ -1,8 +1,11 @@
-import { useContext, useRef } from "react";
+import { ChangeEvent, KeyboardEvent, useRef } from "react";
 import styled from "styled-components";
-import { SearchContext } from "../../contexts";
 import Icon from '../../assets/search.png';
-import { api } from "../../api/api";
+import { useDispatch, useSelector } from "react-redux";
+import { select } from "../../store/selector";
+import { searchQuestions, setSearchQuery } from "../../store/questions/questions.action";
+import { fakeSessionId } from "../../api/mockApi";
+import { getSections } from "../../store/questions/questions.action";
 
 const SearchWrapper = styled.div`
     position: absolute;
@@ -52,39 +55,42 @@ const SearchIcon = styled.div`
 
 const Search = () => {
 
-    const searchContext = useContext(SearchContext);
-    const visible = searchContext.visible;
+    const searchQuery = useSelector(select.questions.searchQuery);
 
-    const sessid = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
+    const dispatch = useDispatch();
 
     const ref = useRef<HTMLInputElement>(null);
 
-    const handleClick = async () => {
-        if (!ref.current?.value) return;
-        const questions = await api.search(ref.current.value, sessid);
-        console.log(questions);
+    const update = async () => {
+        const sessionId = window.faqConfig?.sessionId || fakeSessionId;
+        if (!ref.current?.value) {
+            dispatch(getSections(sessionId));
+        } else {
+            dispatch(searchQuestions(searchQuery, sessionId));
+        }
     }
 
-    const handleTransitionEnd = () => {
-        
-        if (visible && ref.current) {
-            ref.current.focus()
-        }
+    const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setSearchQuery(e.target.value));
+    };
+
+    const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
+        update();
     }
 
     return (
         <SearchWrapper>
             <SearchInput 
+                onKeyPress={handleKeyPress}
                 ref={ref}
-                visible={visible}
-                value={searchContext.value} 
-                onChange={e => searchContext.setValue(e.target.value)}
-                onTransitionEnd={handleTransitionEnd}
+                visible={true}
+                value={searchQuery} 
+                onChange={handleChange}
                 className="search-input"
                 placeholder="Быстрый поиск..."
                 />
             <SearchIcon 
-                onClick={handleClick}
+                onClick={update}
                 className="search-button"
             />
         </SearchWrapper>

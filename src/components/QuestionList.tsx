@@ -1,8 +1,7 @@
-import React, { useContext, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { SearchContext } from '../contexts';
 import { theme } from '../theme';
-import { BitrixQuestion } from '../types';
+import { Question } from '../types';
 import QuestionItem from './Question';
 
 const QuestionListWrapper = styled.div`
@@ -26,25 +25,16 @@ const QuestionListContainer = styled.div`
 `;
 
 interface QuestionListProps {
-    questions: BitrixQuestion[]
+    questions: Question[]
 }
 
 const QuestionList = ({questions} : QuestionListProps) => {
 
-    const searchCtx = useContext(SearchContext);
-
-    const filter = searchCtx.value;
-
-    const filteredQuestions = !filter ? questions : questions.filter(question => {
-        return new RegExp(filter.toLowerCase()).test(question.NAME.toLowerCase()) || 
-        new RegExp(filter.toLowerCase()).test(question.DETAIL_TEXT.toLowerCase())
-    })
-   
     return (
         <QuestionListWrapper>
-
+            
             <QuestionListContainer>
-                {filteredQuestions.map((question, id) => {
+                {!!questions && questions.map((question, id) => {
                     return (
                         <Fragment key={id}>
                             <QuestionItem question={question}/>
