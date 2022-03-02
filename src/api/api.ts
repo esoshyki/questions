@@ -69,8 +69,6 @@ const newQuestion = async (sessionId: string, question: NewQuestion) : Promise<B
 
 const search = async (query: string, sessionID: string) : Promise<Question[]> => {
     try {
-        console.log(`query`, query);
-        console.log("sessid", sessionID);
         const response: AxiosResponse = await instanceAPI.get("/", {
             params: {
                 action: ApiActions.Search,
@@ -78,8 +76,6 @@ const search = async (query: string, sessionID: string) : Promise<Question[]> =>
                 q: query
             }
         });
-
-        console.log(response);
 
         const bitrixResponse: BitrixResponse = response.data;
 

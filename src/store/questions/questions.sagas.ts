@@ -20,8 +20,6 @@ function* getQuestionsWorker (action: RAction) {
 function* searchQuestionWorker (action: RAction) {
     const { sessionId, query } = action.payload;
     yield put(setLoading(true));
-
-    console.log(sessionId, query);
     const questions: Question[] = yield api.search(query, sessionId);
     yield put(setQuestions(questions));
     yield put(setLoading(false));

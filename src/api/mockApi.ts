@@ -88,10 +88,6 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
         }
     }).reply(function(config) {
 
-        console.log(config.params.q);
-
-        console.log(questions.filter(question => question.DETAIL_TEXT.toLowerCase().match(config.params.q)))
-
         return [
             200, {
                 data: questions.filter(question => question.DETAIL_TEXT.toLowerCase().match(config.params.q))}
@@ -99,8 +95,6 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
     });
 
     mock.onPost("/").reply(200, { data: true })
-
-    console.log(mock);
 
     return mock
 };
