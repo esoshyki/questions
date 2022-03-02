@@ -21,6 +21,7 @@ const AppWrapper = styled.div<{
     width: 100%;
     max-width: 1000px;
     margin: 0 10px;
+    min-height: 800px;
     height: ${props => props.bitrix ? "100%" : "100vh"};
     * {
         box-sizing: border-box;

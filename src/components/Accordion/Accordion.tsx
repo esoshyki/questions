@@ -1,4 +1,4 @@
-import React, {ReactNode, useContext, useEffect, useRef, useState} from "react";
+import React, {ReactNode, useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import { theme } from "../../theme";
 import PlusIcon from '../../assets/plus.png'

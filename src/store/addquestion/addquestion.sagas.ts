@@ -12,6 +12,6 @@ function* sendQuestionWorker (action: RAction) {
     yield put(setLoading(false))
 }
 
-export default function* () {
+export default function* addQuestionSagas() {
     yield takeEvery(AddQuestionActions.SendQuestion , sendQuestionWorker)
 }
