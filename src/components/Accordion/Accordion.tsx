@@ -5,6 +5,7 @@ import PlusIcon from '../../assets/plus.png'
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "../../store/selector";
 import { setResize } from "../../store/view/view.actions";
+import { zIndexes } from "../../zIndexes";
 
 const Container = styled.div`
     width: 100%;
@@ -30,7 +31,7 @@ const AccordionHeader = styled.div<{
     display: flex;
     flex-direction: row;
     align-items: center;
-    z-index: 5;
+    z-index: ${zIndexes.accordionHeader};
     transition: background-color 100ms ease-in;
     &:hover {
         cursor: pointer;
@@ -49,7 +50,7 @@ const AccordionBody = styled.div<{
     opacity: ${props => props.visibleHeight ? 1 : 0};
     transition: opacity 100ms linear 0s, height 300ms linear;
     user-select: none;
-    z-index: 4;
+    z-index: ${zIndexes.accordionBode};
     overflow: hidden;
     top: 0;
     height: ${props => props.visibleHeight ? `${props.visibleHeight}px` : "0"};

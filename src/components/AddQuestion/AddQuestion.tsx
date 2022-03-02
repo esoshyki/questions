@@ -10,6 +10,8 @@ import { AddQuestionLabel } from "./AddQuestionLabel";
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "../../store/selector";
 import { addQuestionRequest, setQuestionText, setShowAddQuestion, toggleQuestionPersonal } from "../../store/addquestion/addquestion.actions";
+import { zIndexes } from "../../zIndexes";
+import Loading from "../Loading";
 
 
 const AddQuestionWrapper = styled.div<{
@@ -20,7 +22,7 @@ const AddQuestionWrapper = styled.div<{
     height: 100%;
     min-height: 800px;
     position: absolute;
-    z-index: 10;
+    z-index: ${zIndexes.addQuestionWrapper};
     background-color: ${props => props.visible ? "rgba(0, 0, 0, 0.8)" : "rgba(0, 0, 0, 0)"};
     left: ${props => props.visible ? 0 : "100%"};
     transition: background-color 500ms ease-in, left 100ms ease-in 500ms;
@@ -83,7 +85,8 @@ const AddQuestion = () => {
 
     const QUESTION = useSelector(select.addQuestion.questionsText);
     const PERSONAL = useSelector(select.addQuestion.questionPersonal);
-    const show = useSelector(select.addQuestion.show)
+    const show = useSelector(select.addQuestion.show);
+    const loading = useSelector(select.addQuestion.loading);
 
     const [textError, setTextError] = useState("");
     const [formErrors, setFormErrors] = useState(false);
@@ -95,7 +98,7 @@ const AddQuestion = () => {
     const send = async () => {
         const sessionId = window.faqConfig?.sessionId || "e14e316cb5cbcae4320a834ebb234f56";
 
-        if (!QUESTION && formErrors) {
+        if (!QUESTION && !formErrors) {
             return setTextError(content.addQuestion.errors.text)
         } else {
             dispatch(addQuestionRequest(sessionId, {
@@ -119,6 +122,8 @@ const AddQuestion = () => {
 
       
         <AddQuestionWrapper visible={show} >
+
+            {loading && <Loading />}
 
             <CloseIcon onClick={onClick}/>
 

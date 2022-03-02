@@ -3,10 +3,11 @@ import styled from "styled-components";
 import { setAddQuestionResult, setShowAddQuestion } from "../../store/addquestion/addquestion.actions";
 import { select } from "../../store/selector";
 import { theme } from "../../theme";
+import { zIndexes } from "../../zIndexes";
 
 const Wrapper = styled.div`
     position: absolute;
-    top: calc(50% - 100px);
+    top: calc(50% - 200px);
     left: calc(50% - 150px);
     width: 300px;
     height: 200px;
@@ -17,7 +18,7 @@ const Wrapper = styled.div`
     background-color: #fff;
     border-radius: 15px;
     border: 1px solid ${theme.colors.borderGray};
-    z-index: 500;
+    z-index: ${zIndexes.addQuestionResult};
 `;
 
 const AddQuestionResult = () => {

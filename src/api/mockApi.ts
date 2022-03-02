@@ -94,7 +94,7 @@ export const createMockInstance = (axiosInstance: AxiosInstance) => {
         ]
     });
 
-    mock.onPost("/").reply(200, { data: true })
+    mock.onPost("/").replyOnce(200, { data: true }).onPost("/").replyOnce(200, { errors: ["Ошибка сервера из моки"] })
 
     return mock
 };

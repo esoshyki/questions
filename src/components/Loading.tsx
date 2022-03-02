@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
+import { zIndexes } from "../zIndexes";
 
 const rotate = keyframes`
     0% {
@@ -19,7 +20,7 @@ const LoaderLayout = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1000;
+    z-index: ${zIndexes.loading};
     display: flex;
     flex-direction: column;
     align-items: center;

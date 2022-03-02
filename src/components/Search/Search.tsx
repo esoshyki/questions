@@ -6,6 +6,7 @@ import { select } from "../../store/selector";
 import { searchQuestions, setSearchQuery } from "../../store/questions/questions.action";
 import { fakeSessionId } from "../../api/mockApi";
 import { getSections } from "../../store/questions/questions.action";
+import { zIndexes } from "../../zIndexes";
 
 const SearchWrapper = styled.div`
     position: absolute;
@@ -18,7 +19,7 @@ const SearchWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    z-index: 5;
+    z-index: ${zIndexes.searchWrapper};
     overflow: hidden;
 `;
 
@@ -46,7 +47,7 @@ const SearchIcon = styled.div`
     height: 50px;
     background-image: url(${Icon});
     background-size: cover;
-    z-index: 6;
+    z-index: ${zIndexes.searchIcon};
     &:hover {
         cursor: pointer;
         transform: scale(1.03)
