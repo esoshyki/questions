@@ -75,7 +75,9 @@ const Search = () => {
     };
 
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        update();
+        if (e.key === "Enter") {
+            update();
+        }
     }
 
     return (
