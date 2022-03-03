@@ -65,6 +65,7 @@ const Search = () => {
 
     const update = async () => {
         const sessionId = window.faqConfig?.sessionId || fakeSessionId;
+        console.log("update");
         if (!ref.current?.value) {
             dispatch(getSections(sessionId));
         } else {

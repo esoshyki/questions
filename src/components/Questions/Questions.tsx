@@ -7,7 +7,7 @@ import { select } from '../../store/selector';
 import { theme } from '../../theme';
 import Question from './Question';
 
-const QuestionListWrapper = styled.div`
+const QuestionContainerWrapper = styled.div`
     display: flex;
     width: 100%;
     justify-content: flex-start;
@@ -18,7 +18,7 @@ const QuestionListWrapper = styled.div`
     overflow-y: scroll;
 `;
 
-const QuestionListContainer = styled.div`
+const QuestionContainerContainer = styled.div`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -33,7 +33,7 @@ const Title = styled.h2`
     width: calc(100% - 20px);
 `;
 
-const QuestionList = () => {
+const QuestionContainer = () => {
 
     const dispatch = useDispatch();
 
@@ -114,11 +114,11 @@ const QuestionList = () => {
 
     return (
         <Fragment>
-            {selectedSection && <QuestionListWrapper ref={wrapperRef}>
+            {selectedSection && <QuestionContainerWrapper ref={wrapperRef}>
 
                 {selectedSection && <Title>{selectedSection.NAME}</Title>}
                 
-                <QuestionListContainer 
+                <QuestionContainerContainer 
                     ref={containerRef}
                     onWheel={handleScroll}>
                     {!!selectedSection.questions && selectedSection.questions
@@ -129,11 +129,11 @@ const QuestionList = () => {
                             </Fragment>
                         )
                     })}
-                </QuestionListContainer>
+                </QuestionContainerContainer>
 
-            </QuestionListWrapper>}
+            </QuestionContainerWrapper>}
         </Fragment>
     )
 };
 
-export default QuestionList;
+export default QuestionContainer;

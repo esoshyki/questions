@@ -9,7 +9,8 @@ export enum QuestionsActions {
     SetSearchQuery = "Questions/Set-Search-Query",
     SearchQuestions = "Questions/Search-Questions",
     SetSelectedSection = "Questions/Set-Selected-Section",
-    SetSize = "Questions/Set-Size"
+    SetSize = "Questions/Set-Size",
+    SetFound = "Questions/Set-Found"
 }
 
 export const setSections = (payload: Section[]) : RAction => ({
@@ -55,5 +56,10 @@ export const searchQuestions = (sessionId: string) : RAction => ({
 export const setSize = (size: number) : RAction => ({
     type: QuestionsActions.SetSize,
     payload: size
+})
+
+export const setFound = (payload: Question[]) : RAction => ({
+    type: QuestionsActions.SetFound,
+    payload
 })
 

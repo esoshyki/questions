@@ -12,6 +12,7 @@ import Sections from "./components/Sections";
 import Search from "./components/Search";
 import Questions from "./components/Questions";
 import AddQuestionButton from "./components/AddQuestion/AddQuestionButton";
+import Found from "./components/Questions/Found";
 
 
 declare global {
@@ -30,6 +31,7 @@ const App = () => {
 
     const result = useSelector(select.addQuestion.result);
     const loading = useSelector(select.questions.loading);
+    const found = useSelector(select.questions.found);
 
     useEffect(() => {
         dispatch(getSections(sessionId))
@@ -40,7 +42,8 @@ const App = () => {
         <Layout >
             {loading && <Loading/>}
             <Left>
-                <Questions />
+                {!found && <Questions />}
+                {found && <Found />}
             </Left>
             
             <Right>

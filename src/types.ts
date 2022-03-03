@@ -49,6 +49,7 @@ export type QuestionsState = {
     searchQuery: string;
     selectedSection: Section | null;
     size: number;
+    found: Question[];
 };
 
 export type AddQuestionState = {

@@ -1,7 +1,7 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 import { api } from "../../api/api";
-import { GetQuestionsPayload, Question, RAction, Section } from "../../types";
-import { QuestionsActions, setLoading, setSections, updateSection } from "./questions.action";
+import { GetQuestionsPayload, Question, RAction, Section, State } from "../../types";
+import { QuestionsActions, setLoading, setFound, setSections, updateSection } from "./questions.action";
 
 function* getSectionsWorker (action: RAction) {
     yield put(setLoading(true));
@@ -20,7 +20,17 @@ function* getQuestionsWorker (action: RAction) {
     yield put(setLoading(false));
 };
 
+function* searchQuestionWorker (action: RAction) {
+    const state: State = yield select();
+    const searchQuery = state.questions.searchQuery;
+    yield put(setLoading(true));
+    const questions: Question[] = yield api.search(searchQuery, action.payload);
+    yield put(setFound(questions));
+    yield put(setLoading(false));
+};
+
 export default function* questionSagas () {
     yield takeEvery(QuestionsActions.GetSections, getSectionsWorker);
     yield takeEvery(QuestionsActions.GetQuestions, getQuestionsWorker);
+    yield takeEvery(QuestionsActions.SearchQuestions, searchQuestionWorker);
 }
