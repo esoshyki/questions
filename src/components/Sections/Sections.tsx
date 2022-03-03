@@ -14,15 +14,15 @@ const SectionsWrapper = styled.div`
     justify-content: flex-start;
     position: relative;
     padding: 10px 0 50px 0;
-    border: 1px solid ${theme.colors.borderGray};
     margin-top: 10px;
     border-radius: 15px;
-    box-shadow: 0px 0px 5px ${theme.colors.borderGray};
 `;
 
 const Title = styled.h4`
     font-weight: 800;
     margin: 10px;
+    width: calc(100% - 20px);
+    text-align: start;
 `
 
 const Sections = () => {
