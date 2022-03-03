@@ -4,15 +4,15 @@ import Icon from '../../assets/search.png';
 import { useDispatch, useSelector } from "react-redux";
 import { select } from "../../store/selector";
 import { searchQuestions, setSearchQuery } from "../../store/questions/questions.action";
-import { fakeSessionId } from "../../api/mockApi";
+import { fakeSessionId } from "../../api/instance";
 import { getSections } from "../../store/questions/questions.action";
 import { zIndexes } from "../../zIndexes";
 
 const SearchWrapper = styled.div`
-    position: absolute;
+    position: relative;
     top: 20px;
     height: 40px;
-    width: 400px;
+    width: 100%;
     left: 0;
     align-self: flex-end;
     display: flex;
@@ -21,6 +21,7 @@ const SearchWrapper = styled.div`
     justify-content: flex-start;
     z-index: ${zIndexes.searchWrapper};
     overflow: hidden;
+    margin-bottom: 40px;
 `;
 
 const SearchInput = styled.input<{
@@ -67,7 +68,7 @@ const Search = () => {
         if (!ref.current?.value) {
             dispatch(getSections(sessionId));
         } else {
-            dispatch(searchQuestions(searchQuery, sessionId));
+            dispatch(searchQuestions(sessionId));
         }
     }
 

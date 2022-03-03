@@ -1,14 +1,14 @@
 import React from 'react'
 import reportWebVitals from './reportWebVitals'
 import ReactDOM from 'react-dom'
-import Questions from './Questions'
+import App from './App'
 import './index.css';
 import { Provider } from "react-redux";
 import { store } from './store';
 
 ReactDOM.render(
     <Provider store={store}>
-        <Questions />
+        <App />
     </Provider>,       
     document.getElementById('root')
 );

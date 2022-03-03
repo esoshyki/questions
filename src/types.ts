@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type RAction = {
     payload?: any,
     type: string;
@@ -6,6 +8,7 @@ export type RAction = {
 export type ViewState = {
     loading: boolean;
     resize: boolean;
+    height: number;
 }
 
 export type Question = {
@@ -14,6 +17,12 @@ export type Question = {
     NAME: string;
     DETAIL_TEXT: string;
     DETAIL_TYPE: string;  
+};
+
+export type CategoryQuestions = {
+    questions: Question[],
+    page: number;
+    pages: number;
 }
 
 export type NewQuestion = {
@@ -21,16 +30,25 @@ export type NewQuestion = {
     PERSONAL: boolean;
 }
 
-export type Section = {
+export type SectionSort = {
     ID: number;
     NAME: string;
 }
 
+export type Section = {
+    ID: number;
+    NAME: string;
+    questions: Question[];
+    page: number;
+    pages: number;
+}
+
 export type QuestionsState = {
     sections: Section[];
-    questions: Question[];
     loading: boolean;
     searchQuery: string;
+    selectedSection: Section | null;
+    size: number;
 };
 
 export type AddQuestionState = {
@@ -52,11 +70,29 @@ export type BitrixResponse = {
     status: string;
 }
 
+// PAYLOADS
+
+export type GetQuestionsPayload = {
+    sessionId: string;
+    selectedSection: Section,
+    size: number;
+}
+
+export type UpdateSectionPayload = {
+    sectionId: string;
+    page: number;
+    pages: number;
+    size: number;
+    questions: Question[]
+}
+
 export enum ApiActions {
-    Questions = "getListFaq",
+    Questions = "getQuestions",
     Sections = "getSections",
     NewQuestion = "newQuestion",
-    Search = "search"
+    Search = "search",
+    GetPageSections = "getPageSections",
+    GetSectionQuestion = "GetSectionQuestion",
 }
 
 // // // // // // // 
@@ -68,4 +104,8 @@ export enum Categories {
 export const categories = {
     jobInCompany: Categories.jobInCompany,
     docs: Categories.docs
+};
+
+export interface HOC {
+    children: ReactNode
 }

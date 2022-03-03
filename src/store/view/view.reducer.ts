@@ -3,7 +3,8 @@ import { ViewActions } from "./view.actions";
 
 const init: ViewState = {
     loading: false,
-    resize: false
+    resize: false,
+    height: 0
 };
 
 export const viewReducer = (state = init, action: RAction) : ViewState => {
@@ -21,6 +22,12 @@ export const viewReducer = (state = init, action: RAction) : ViewState => {
             return {
                 ...state,
                 resize: payload
+            }
+
+        case ViewActions.SetHeight:
+            return {
+                ...state,
+                height: payload
             }
 
         default:

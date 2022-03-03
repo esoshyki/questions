@@ -13,5 +13,8 @@ export const content = {
             text: "Укажите содержание вопроса",
             apiError: "Ошибка сервера. "
         }
+    },
+    sections: {
+        title: "Разделы"
     }
 }

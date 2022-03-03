@@ -1,13 +1,12 @@
 import axios from 'axios';
-import { createMockInstance } from './mockApi';
 
 const apiURL = process.env.NODE_ENV === "development"
-    ? "http://localhost:8080"
+    ? "http://localhost:4000"
     : process.env.REACT_APP_VERCEL_URL 
     ? process.env.REACT_APP_VERCEL_URL
     : "/bitrix/services/main/ajax.php";
 
-const mock = process.env.NODE_ENV === "development" || !!process.env.REACT_APP_VERCEL_URL;
+export const fakeSessionId = "e14e316cb5cbcae4320a834ebb234f56";
 
 const instanceAPI = axios.create({
     baseURL: apiURL,
@@ -20,8 +19,4 @@ instanceAPI.defaults.params = {};
 instanceAPI.defaults.params["c"] = "manao:support.faq";
 instanceAPI.defaults.params["mode"] = "class";
 
-if (mock) {
-    createMockInstance(instanceAPI);
-    }
-
-export default instanceAPI;  
+export default instanceAPI;

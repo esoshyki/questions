@@ -1,25 +1,7 @@
 import { AxiosResponse } from "axios";
-import { ApiActions, NewQuestion, Question, BitrixResponse, Section } from "../types";
+import { ApiActions, NewQuestion, Question, BitrixResponse, Section, SectionSort, GetQuestionsPayload } from "../types";
 import instanceAPI from "./instance";
 import qs from 'qs';
-
-const getQuestions = async (sessionId: string) : Promise<Question[]> => {
-    try {
-        const response: AxiosResponse = await instanceAPI.get("/", {
-            params: { 
-                action: ApiActions.Questions,
-                sessid: sessionId
-            }
-        })
-
-        const bitrixResponse: BitrixResponse = response.data;
-
-        const questions: Question[] = bitrixResponse.data;
-        return questions
-    } catch (error) {
-        return []
-    }
-};
 
 const getSections = async (sessionId: string) : Promise<Section[]> => {
     try {
@@ -28,16 +10,48 @@ const getSections = async (sessionId: string) : Promise<Section[]> => {
                 action: ApiActions.Sections,
                 sessid: sessionId
             }
-        });
+        })
 
-        const bitrixResponse: BitrixResponse = response.data;
+        const bxResponse: BitrixResponse = response.data;
 
-        const sections: Section[] = bitrixResponse.data;
-        return sections
+        const shortSections: SectionSort[] = bxResponse.data;
+        const sections: Section[] = shortSections.map(section => ({
+            ...section,
+            questions: [],
+            page: 0,
+            pages: 0,
+        }));
+        return sections;
     } catch (error) {
         return []
     }
+}
+
+const getQuestions = async ({
+    sessionId,
+    selectedSection,
+    size
+} : GetQuestionsPayload) : Promise<Section> => {
+    try {
+        const response: AxiosResponse = await instanceAPI.get("/", {
+            params: { 
+                action: ApiActions.Questions,
+                sessid: sessionId,
+                sectionId: selectedSection.ID,
+                page: selectedSection.page,
+                size
+            }
+        })
+
+        const bitrixResponse: BitrixResponse = response.data;
+
+        const questions: Section = bitrixResponse.data;
+        return questions
+    } catch (error) {
+        return selectedSection
+    }
 };
+
 
 const newQuestion = async (sessionId: string, question: NewQuestion) : Promise<BitrixResponse> => {
     try {
@@ -89,8 +103,8 @@ const search = async (query: string, sessionID: string) : Promise<Question[]> =>
 }
 
 export const api = {
-    getQuestions,
     getSections,
+    getQuestions,
     newQuestion,
-    search
+    search,
 }

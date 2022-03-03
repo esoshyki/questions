@@ -1,4 +1,3 @@
-import { AxiosResponse } from "axios";
 import { put, takeEvery } from "redux-saga/effects";
 import { api } from "../../api/api";
 import { BitrixResponse, RAction } from "../../types";

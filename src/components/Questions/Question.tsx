@@ -1,10 +1,10 @@
 import React from "react";
-import { Question } from "../types";
-import Accordion from "./Accordion";
+import { Question } from "../../types";
+import Accordion from "../Accordion";
 import styled from 'styled-components'
-import { theme } from "../theme";
+import { theme } from "../../theme";
 
-interface QuestionItemProps {
+interface QuestionProps {
     question: Question;
 };
 
@@ -12,7 +12,7 @@ const Content = styled.p`
     margin: 0;
 `;
 
-const QuestionItem = ({ question } : QuestionItemProps) => {
+const QuestionElement = ({ question } : QuestionProps) => {
 
     return (
         <Accordion 
@@ -27,4 +27,4 @@ const QuestionItem = ({ question } : QuestionItemProps) => {
     )
 }
 
-export default QuestionItem;
+export default QuestionElement;

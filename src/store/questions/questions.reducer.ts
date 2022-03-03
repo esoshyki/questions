@@ -2,10 +2,11 @@ import { QuestionsState, RAction } from "../../types";
 import { QuestionsActions } from "./questions.action";
 
 const init: QuestionsState = {
+    selectedSection: null,
     sections: [],
-    questions: [],
     loading: false,
-    searchQuery: ""
+    searchQuery: "",
+    size: 10
 };
 
 export const questionReducer = (state = init, action: RAction) : QuestionsState => {
@@ -19,10 +20,10 @@ export const questionReducer = (state = init, action: RAction) : QuestionsState 
                 sections: payload
             }
 
-        case QuestionsActions.SetQuestions:
+        case QuestionsActions.UpdateSection:
             return {
                 ...state,
-                questions: payload
+                selectedSection: payload
             }
 
         case QuestionsActions.SetLoading:
@@ -35,6 +36,18 @@ export const questionReducer = (state = init, action: RAction) : QuestionsState 
             return {
                 ...state,
                 searchQuery: payload
+            }
+
+        case QuestionsActions.SetSelectedSection:
+            return {
+                ...state,
+                selectedSection: !payload ? payload : (state.sections.find(section => section.ID === payload) || null)
+            }
+
+        case QuestionsActions.SetSize:
+            return {
+                ...state,
+                size: payload
             }
 
         default:

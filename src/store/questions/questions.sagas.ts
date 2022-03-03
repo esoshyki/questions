@@ -1,7 +1,7 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { api } from "../../api/api";
-import { Question, RAction, Section } from "../../types";
-import { QuestionsActions, setLoading, setQuestions, setSections } from "./questions.action";
+import { GetQuestionsPayload, Question, RAction, Section } from "../../types";
+import { QuestionsActions, setLoading, setSections, updateSection } from "./questions.action";
 
 function* getSectionsWorker (action: RAction) {
     yield put(setLoading(true));
@@ -11,22 +11,16 @@ function* getSectionsWorker (action: RAction) {
 };
 
 function* getQuestionsWorker (action: RAction) {
+    const payload: GetQuestionsPayload = action.payload;
     yield put(setLoading(true));
-    const questions: Question[] = yield api.getQuestions(action.payload);
-    yield put(setQuestions(questions));
-    yield put(setLoading(false))
+    const questions: Question[] = payload.selectedSection.questions;
+    const section: Section = yield api.getQuestions(action.payload);
+    section.questions = [...questions, ...section.questions];
+    yield put(updateSection(section));
+    yield put(setLoading(false));
 };
 
-function* searchQuestionWorker (action: RAction) {
-    const { sessionId, query } = action.payload;
-    yield put(setLoading(true));
-    const questions: Question[] = yield api.search(query, sessionId);
-    yield put(setQuestions(questions));
-    yield put(setLoading(false));
-}
-
 export default function* questionSagas () {
-    yield takeEvery(QuestionsActions.GetSectionsRequest, getSectionsWorker);
-    yield takeEvery(QuestionsActions.GetQuestionsRequest, getQuestionsWorker);
-    yield takeEvery(QuestionsActions.SearchRequest, searchQuestionWorker);
+    yield takeEvery(QuestionsActions.GetSections, getSectionsWorker);
+    yield takeEvery(QuestionsActions.GetQuestions, getQuestionsWorker);
 }
