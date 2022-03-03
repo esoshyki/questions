@@ -10,7 +10,7 @@ import { zIndexes } from "../../zIndexes";
 const Container = styled.div`
     width: 100%;
     margin: 0;
-    border-bottom: 1px solid ${theme.colors.borderGray};
+    /* border-bottom: 1px solid ${theme.colors.borderGray}; */
     position: relative;
     overflow: hidden;
     font-family: Roboto, Open Sans, Helvetica Neue, sans-serif;

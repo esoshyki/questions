@@ -7,11 +7,9 @@ import AddQuestion from "./AddQuestion";
 
 
 export const ButtonWrapper = styled.button`
-    /* background-color: ${theme.colors.green}; */
-    position: absolute !important;
-    right: 20px;
-    top: 20px;
-`
+    width: 200px;
+    margin: 20px auto;
+`;
 
 const AddQuestionButton = () => {
 

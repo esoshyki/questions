@@ -1,7 +1,6 @@
 import { ReactNode, useRef, useLayoutEffect, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
-import { select } from "../../store/selector";
 import { setHeight } from "../../store/view/view.actions";
 import { HOC } from "../../types";
 

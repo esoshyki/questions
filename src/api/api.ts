@@ -30,7 +30,8 @@ const getSections = async (sessionId: string) : Promise<Section[]> => {
 const getQuestions = async ({
     sessionId,
     selectedSection,
-    size
+    size,
+    q
 } : GetQuestionsPayload) : Promise<Section> => {
     try {
         const response: AxiosResponse = await instanceAPI.get("/", {
@@ -39,7 +40,8 @@ const getQuestions = async ({
                 sessid: sessionId,
                 sectionId: selectedSection.ID,
                 page: selectedSection.page,
-                size
+                size,
+                q
             }
         })
 

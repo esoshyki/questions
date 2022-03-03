@@ -794,6 +794,7 @@ a.ui-btn-split:focus,
 
 ::-webkit-scrollbar {
 	width: 10px !important;
+	position: absolute !important;
 }
 ::-webkit-scrollbar-track {
 	background: #fff !important;        /* color of the tracking area */

@@ -76,14 +76,7 @@ export type GetQuestionsPayload = {
     sessionId: string;
     selectedSection: Section,
     size: number;
-}
-
-export type UpdateSectionPayload = {
-    sectionId: string;
-    page: number;
-    pages: number;
-    size: number;
-    questions: Question[]
+    q?: string;
 }
 
 export enum ApiActions {

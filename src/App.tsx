@@ -11,6 +11,7 @@ import Right from "./components/Layout/Right";
 import Sections from "./components/Sections";
 import Search from "./components/Search";
 import Questions from "./components/Questions";
+import AddQuestionButton from "./components/AddQuestion/AddQuestionButton";
 
 
 declare global {
@@ -43,6 +44,7 @@ const App = () => {
             </Left>
             
             <Right>
+                <AddQuestionButton />
                 <Search />
                 <Sections />
             </Right>

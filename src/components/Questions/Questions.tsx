@@ -19,17 +19,18 @@ const QuestionListWrapper = styled.div`
 `;
 
 const QuestionListContainer = styled.div`
-    border-radius: 10px;
-    border: 1px solid ${theme.colors.borderGray};
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content:  flex-start;
     width: 100%;
+    padding-right: 20px;
 `;
 
 const Title = styled.h2`
     font-weight: 900;
+    text-align: start;
+    width: calc(100% - 20px);
 `;
 
 const QuestionList = () => {

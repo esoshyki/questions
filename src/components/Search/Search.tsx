@@ -91,7 +91,7 @@ const Search = () => {
                 value={searchQuery} 
                 onChange={handleChange}
                 className="search-input"
-                placeholder="Быстрый поиск..."
+                placeholder="Поиск..."
                 />
             <SearchIcon 
                 onClick={update}
