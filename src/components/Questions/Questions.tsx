@@ -2,12 +2,9 @@ import React, { Fragment, useEffect, useRef, WheelEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { fakeSessionId } from '../../api/instance';
-import { getQuestions, setSize } from '../../store/questions/questions.action';
+import { getQuestions } from '../../store/questions/questions.action';
 import { select } from '../../store/selector';
-import Question from './Question';
 import QuestionList from './QuestionList';
-
-
 
 const Title = styled.h2`
     font-weight: 900;
@@ -22,9 +19,9 @@ const QuestionContainer = () => {
     const selectedSection = useSelector(select.questions.selectedSection);
     const loading = useSelector(select.questions.loading);
     const size = useSelector(select.questions.size);
-    const height = useSelector(select.view.height);
 
     useEffect(() => {
+        console.log("use effect");
         if (selectedSection) {
             const section = {
                 ...selectedSection,
@@ -38,8 +35,6 @@ const QuestionContainer = () => {
         };
     }, [dispatch, selectedSection?.ID, size]);
 
-
-
     const loadNextPage = () => {
         if (!loading && selectedSection) {
             if (selectedSection.page < selectedSection.pages) {
@@ -52,11 +47,9 @@ const QuestionContainer = () => {
         }
     }
 
-
     return (
         <Fragment>
                 {selectedSection && <Title>{selectedSection.NAME}</Title>}
-              
                 {selectedSection && <QuestionList 
                     questions={selectedSection.questions}
                     loadNextPage={loadNextPage}

@@ -42,8 +42,8 @@ const App = () => {
         <Layout >
             {loading && <Loading/>}
             <Left>
-                {!found && <Questions />}
-                {found && <Found />}
+                {!found.length && <Questions />}
+                {found.length && <Found />}
             </Left>
             
             <Right>

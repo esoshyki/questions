@@ -1,10 +1,12 @@
 import axios from 'axios';
 
 const apiURL = process.env.NODE_ENV === "development"
-    ? "http://localhost:4000"
-    : process.env.REACT_APP_VERCEL_URL 
-    ? process.env.REACT_APP_VERCEL_URL
+    ? "https://test-server-tau.vercel.app"
+    : "https://test-server-tau.vercel.app"
+    ? "https://test-server-tau.vercel.app"
     : "/bitrix/services/main/ajax.php";
+
+console.log(apiURL);
 
 export const fakeSessionId = "e14e316cb5cbcae4320a834ebb234f56";
 
