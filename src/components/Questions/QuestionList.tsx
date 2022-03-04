@@ -45,7 +45,6 @@ const QuestionList = ({questions, loadNextPage} : Props) => {
     const height = useSelector(select.view.height);
 
     const handleScroll = (e: WheelEvent<HTMLDivElement>) => {
-        console.log(containerRef.current?.clientTop)
         if (!containerRef.current || !wrapperRef.current) return;
         if (e.deltaY > 0 && checkOverFlow(
             containerRef.current.offsetHeight,
@@ -69,7 +68,8 @@ const QuestionList = ({questions, loadNextPage} : Props) => {
                 wrapperRef.current.scrollTop,
                 wrapperRef.current.offsetHeight       
             )) {
-                loadNextPage()
+                console.log("here");
+                // loadNextPage()
             }
         }
 

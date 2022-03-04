@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { fakeSessionId } from '../../api/instance'
@@ -13,14 +13,14 @@ const Title = styled.h2`
 `
 
 const QuestionContainer = () => {
-    const dispatch = useDispatch()
-
+    const dispatch = useDispatch();
     const selectedSection = useSelector(select.questions.selectedSection)
     const loading = useSelector(select.questions.loading)
     const size = useSelector(select.questions.size)
     const found = useSelector(select.questions.found)
     const searchQuery = useSelector(select.questions.searchQuery)
-    const isFound = useSelector(select.questions.isFound)
+    const isFound = useSelector(select.questions.isFound);
+    const ID = selectedSection?.ID || null;
 
     useEffect(() => {
         if (selectedSection) {
@@ -36,7 +36,7 @@ const QuestionContainer = () => {
                 })
             )
         }
-    }, [dispatch, selectedSection, selectedSection?.ID, size])
+    }, [dispatch, ID, size])
 
     const loadNextPage = () => {
         if (!loading && selectedSection) {
