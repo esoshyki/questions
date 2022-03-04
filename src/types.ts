@@ -9,6 +9,7 @@ export type ViewState = {
     loading: boolean;
     resize: boolean;
     height: number;
+    sound: boolean;
 }
 
 export type Question = {

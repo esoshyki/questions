@@ -4,7 +4,8 @@ import { ViewActions } from "./view.actions";
 const init: ViewState = {
     loading: false,
     resize: false,
-    height: 0
+    height: 0,
+    sound: true
 };
 
 export const viewReducer = (state = init, action: RAction) : ViewState => {
@@ -28,6 +29,12 @@ export const viewReducer = (state = init, action: RAction) : ViewState => {
             return {
                 ...state,
                 height: payload
+            }
+
+        case ViewActions.SetSound:
+            return {
+                ...state,
+                sound: payload
             }
 
         default:

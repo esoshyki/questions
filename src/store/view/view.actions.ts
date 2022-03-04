@@ -4,6 +4,7 @@ export enum ViewActions {
     ToggleLoading = "View/Toggle-Loading",
     SetResize = "View/Set-Resize",
     SetHeight = "View/Set-Height",
+    SetSound = "View/Set-Sound"
 };
 
 export const toggleLoading = () : RAction => ({
@@ -17,5 +18,10 @@ export const setResize = (payload: boolean) : RAction => ({
 
 export const setHeight = (payload: number) : RAction => ({
     type: ViewActions.SetHeight,
+    payload
+})
+
+export const setSound = (payload: boolean) : RAction => ({
+    type: ViewActions.SetSound,
     payload
 })
