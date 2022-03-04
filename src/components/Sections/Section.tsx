@@ -45,6 +45,7 @@ const Category = ({ name, id } : {
             dispatch(setLoaded(false))
         } else {
             dispatch(setSelectedSection(id));
+            dispatch(setLoaded(false))
         }
     };
 

@@ -15,6 +15,8 @@ import {
     updateSection,
     setIsFound,
     setSearchQuery,
+    setSelectedSection,
+    setLoaded,
 } from './questions.action'
 
 function* getSectionsWorker(action: RAction) {
@@ -42,6 +44,8 @@ function* searchQuestionWorker(action: RAction) {
     const searchQuery = state.questions.searchQuery
     yield put(setLoading(true))
     yield put(setIsFound(true))
+    yield put(setSelectedSection(null))
+    yield put(setLoaded(false))
     const questions: Question[] = yield api.search(searchQuery, action.payload)
     yield put(setFound(questions))
     yield put(setLoading(false))
