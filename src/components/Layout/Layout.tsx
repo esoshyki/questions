@@ -1,4 +1,4 @@
-import { ReactNode, useRef, useLayoutEffect, useEffect } from "react";
+import React, { useRef, useLayoutEffect, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setHeight } from "../../store/view/view.actions";
@@ -35,13 +35,13 @@ const Layout = (props: HOC) => {
         window.addEventListener("resize", updateHeight);
 
         return () => window.removeEventListener("resize", updateHeight);
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         if (ref.current) {
             dispatch(setHeight(ref.current.offsetHeight));
         }
-    }, [ref.current])
+    }, [dispatch])
 
     return (
         <AppWrapper 

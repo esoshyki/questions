@@ -2,7 +2,6 @@ import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import { setShowAddQuestion } from "../../store/addquestion/addquestion.actions";
-import { theme } from "../../theme";
 import AddQuestion from "./AddQuestion";
 
 

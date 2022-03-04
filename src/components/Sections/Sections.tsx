@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { content } from "../../content";
 import { select } from "../../store/selector";
-import { theme } from "../../theme";
 import Category from "./Section";
 
 const SectionsWrapper = styled.div`
