@@ -1,12 +1,16 @@
-import { ChangeEvent, KeyboardEvent, useRef } from "react";
-import styled from "styled-components";
-import Icon from '../../assets/search.png';
-import { useDispatch, useSelector } from "react-redux";
-import { select } from "../../store/selector";
-import { searchQuestions, setSearchQuery } from "../../store/questions/questions.action";
-import { fakeSessionId } from "../../api/instance";
-import { getSections } from "../../store/questions/questions.action";
-import { zIndexes } from "../../zIndexes";
+import { ChangeEvent, KeyboardEvent, useRef } from 'react'
+import styled from 'styled-components'
+import Icon from '../../assets/search.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { select } from '../../store/selector'
+import {
+    searchQuestions,
+    setFound,
+    setSearchQuery,
+} from '../../store/questions/questions.action'
+import { fakeSessionId } from '../../api/instance'
+import { getSections } from '../../store/questions/questions.action'
+import { zIndexes } from '../../zIndexes'
 
 const SearchWrapper = styled.div`
     position: relative;
@@ -22,7 +26,7 @@ const SearchWrapper = styled.div`
     z-index: ${zIndexes.searchWrapper};
     overflow: hidden;
     margin-bottom: 40px;
-`;
+`
 
 const SearchInput = styled.input<{
     visible: boolean
@@ -38,7 +42,7 @@ const SearchInput = styled.input<{
     &:focus {
         outline: none;
     }
-`;
+`
 
 const SearchIcon = styled.div`
     position: absolute;
@@ -51,55 +55,52 @@ const SearchIcon = styled.div`
     z-index: ${zIndexes.searchIcon};
     &:hover {
         cursor: pointer;
-        transform: scale(1.03)
+        transform: scale(1.03);
     }
-`;
+`
 
 const Search = () => {
+    const searchQuery = useSelector(select.questions.searchQuery)
 
-    const searchQuery = useSelector(select.questions.searchQuery);
+    const dispatch = useDispatch()
 
-    const dispatch = useDispatch();
-
-    const ref = useRef<HTMLInputElement>(null);
+    const ref = useRef<HTMLInputElement>(null)
 
     const update = async () => {
-        const sessionId = window.faqConfig?.sessionId || fakeSessionId;
-        console.log("update");
+        const sessionId = window.faqConfig?.sessionId || fakeSessionId
+        console.log('update')
         if (!ref.current?.value) {
-            dispatch(getSections(sessionId));
+            dispatch(setFound([]))
+            dispatch(getSections(sessionId))
         } else {
-            dispatch(searchQuestions(sessionId));
+            dispatch(searchQuestions(sessionId))
         }
     }
 
     const handleChange = async (e: ChangeEvent<HTMLInputElement>) => {
-        dispatch(setSearchQuery(e.target.value));
-    };
+        dispatch(setSearchQuery(e.target.value))
+    }
 
     const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === "Enter") {
-            update();
+        if (e.key === 'Enter') {
+            update()
         }
     }
 
     return (
         <SearchWrapper>
-            <SearchInput 
+            <SearchInput
                 onKeyPress={handleKeyPress}
                 ref={ref}
                 visible={true}
-                value={searchQuery} 
+                value={searchQuery}
                 onChange={handleChange}
                 className="search-input"
                 placeholder="Поиск..."
-                />
-            <SearchIcon 
-                onClick={update}
-                className="search-button"
             />
+            <SearchIcon onClick={update} className="search-button" />
         </SearchWrapper>
     )
-};
+}
 
-export default Search;
+export default Search

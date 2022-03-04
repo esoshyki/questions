@@ -50,6 +50,7 @@ export type QuestionsState = {
     selectedSection: Section | null;
     size: number;
     found: Question[];
+    isFound: boolean;
 };
 
 export type AddQuestionState = {

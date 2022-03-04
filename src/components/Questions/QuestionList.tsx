@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { select } from '../../store/selector';
 import { useDispatch, useSelector } from 'react-redux';
 import QuestionElement from './Question';
-import { getQuestions, setSize } from '../../store/questions/questions.action';
+import { setSize } from '../../store/questions/questions.action';
 
 interface Props {
     questions: Question[],
@@ -38,32 +38,20 @@ const QuestionList = ({questions, loadNextPage} : Props) => {
 
     const dispatch = useDispatch();
 
+    const checkOverFlow = (contentHeight: number, scrollTop: number, wrapperHeight: number) => {
+        return contentHeight - scrollTop < wrapperHeight * 1.5
+    };
 
-    const loading = useSelector(select.questions.loading);
-    const size = useSelector(select.questions.size);
     const height = useSelector(select.view.height);
 
-
-    const checkOverflow = () => {
-        if (containerRef.current && wrapperRef.current && questions) {
-            const contentHeight = containerRef.current.offsetHeight;
-            const scrollTop = wrapperRef.current.scrollTop;
-            const wrapperHeight = wrapperRef.current.offsetHeight;
-            console.log(
-                `contentHeight: ${contentHeight}
-                 scrollTop: ${scrollTop}
-                 wrapperHeight: ${wrapperHeight}
-                `
-            )
-            if (contentHeight - scrollTop < wrapperHeight * 1.5) {
-                return true
-            }
-        }
-        return false;
-    }
-
     const handleScroll = (e: WheelEvent<HTMLDivElement>) => {
-        if (e.deltaY > 0 && checkOverflow()) {
+        console.log(containerRef.current?.clientTop)
+        if (!containerRef.current || !wrapperRef.current) return;
+        if (e.deltaY > 0 && checkOverFlow(
+            containerRef.current.offsetHeight,
+            wrapperRef.current.scrollTop,
+            wrapperRef.current.offsetHeight
+        )) {
             loadNextPage()
         };
     };
@@ -71,23 +59,25 @@ const QuestionList = ({questions, loadNextPage} : Props) => {
     useEffect(() => {
         const size = Math.round(1.5 * height / 95);
         dispatch(setSize(size));
-    }, [height]);
+    }, [dispatch, height]);
 
     useEffect(() => {
-        if (containerRef.current) {
-            console.log(containerRef.current.offsetHeight);
-        }
-    }, [containerRef.current]);
 
-    useEffect(() => {
-        if (checkOverflow()) {
-            loadNextPage()
+        if (containerRef.current && wrapperRef.current) {
+            if (checkOverFlow(
+                containerRef.current.offsetHeight,
+                wrapperRef.current.scrollTop,
+                wrapperRef.current.offsetHeight       
+            )) {
+                loadNextPage()
+            }
         }
-    }, [questions])
+
+    }, [questions, loadNextPage ])
 
 
     return (
-        <QuestionContainerWrapper>
+        <QuestionContainerWrapper ref={wrapperRef}>
             <QuestionWrapperContainer 
                 ref={containerRef}
                 onWheel={handleScroll}>
