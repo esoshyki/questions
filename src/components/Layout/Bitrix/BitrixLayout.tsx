@@ -5,7 +5,7 @@ import { BXLeftAsside } from './BXLeftAsside'
 import { BXRightAsside } from './BXRightAsside';
 
 const Wrapper = styled.div`
-    width: 100vw;
+    width: 100%;
     position: relative;
 `;
 
