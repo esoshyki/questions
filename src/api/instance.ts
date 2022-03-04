@@ -2,9 +2,7 @@ import axios from 'axios';
 
 const apiURL = process.env.NODE_ENV === "development"
     ? "https://test-server-tau.vercel.app"
-    : "https://test-server-tau.vercel.app"
-    ? "https://test-server-tau.vercel.app"
-    : "/bitrix/services/main/ajax.php";
+    : "/bitrix/services/main/ajax.php"
 
 console.log(apiURL);
 
