@@ -69,7 +69,7 @@ const App = () => {
             </Right>
             {result && <AddQuestionResult />}
 
-            <Sound />
+            {/* <Sound /> */}
         </Layout>
     )
 };
