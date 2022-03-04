@@ -8,8 +8,6 @@ const AppWrapper = styled.div<{
     bitrix: boolean
 }>`
     width: 100%;
-    max-width: 1000px;
-    margin: 0 10px;
     min-height: 800px;
     height: ${props => props.bitrix ? "100%" : "100vh"};
     * {
@@ -19,6 +17,8 @@ const AppWrapper = styled.div<{
     overflow: hidden;
     display: grid;
     grid-template-columns: 2fr 1fr;
+    padding: 10px 20px;
+    box-sizing: border-box;
 `;
 
 const Layout = (props: HOC) => {
