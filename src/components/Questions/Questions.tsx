@@ -36,7 +36,7 @@ const QuestionContainer = () => {
                 })
             )
         }
-    }, [dispatch, selectedSection?.ID, size])
+    }, [dispatch, selectedSection, selectedSection?.ID, size])
 
     const loadNextPage = () => {
         if (!loading && selectedSection) {

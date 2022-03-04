@@ -1,70 +1,70 @@
-import { GetQuestionsPayload, Question, RAction, Section } from "../../types";
+import { GetQuestionsPayload, Question, RAction, Section } from '../../types'
 
 export enum QuestionsActions {
-    SetSections = "Questions/Set-Sections",
-    UpdateSection = "Questions/Update-Section-Questions",
-    SetLoading = "Questions/Set-Loading",
-    GetSections = "Questions/Get-Sections",
-    GetQuestions = "Questions/Get-Questions",
-    SetSearchQuery = "Questions/Set-Search-Query",
-    SearchQuestions = "Questions/Search-Questions",
-    SetSelectedSection = "Questions/Set-Selected-Section",
-    SetSize = "Questions/Set-Size",
-    SetFound = "Questions/Set-Found",
-    SetIsFound = "Questions/Is-Found"
+    SetSections = 'Questions/Set-Sections',
+    UpdateSection = 'Questions/Update-Section-Questions',
+    SetLoading = 'Questions/Set-Loading',
+    GetSections = 'Questions/Get-Sections',
+    GetQuestions = 'Questions/Get-Questions',
+    SetSearchQuery = 'Questions/Set-Search-Query',
+    SearchQuestions = 'Questions/Search-Questions',
+    SetSelectedSection = 'Questions/Set-Selected-Section',
+    SetSize = 'Questions/Set-Size',
+    SetFound = 'Questions/Set-Found',
+    SetIsFound = 'Questions/Is-Found',
 }
 
-export const setSections = (payload: Section[]) : RAction => ({
+export const setSections = (payload: Section[]): RAction => ({
     type: QuestionsActions.SetSections,
-    payload
+    payload,
 })
 
-export const setLoading = (payload: boolean) : RAction => ({
+export const setLoading = (payload: boolean): RAction => ({
     type: QuestionsActions.SetLoading,
-    payload
+    payload,
 })
 
-export const setSelectedSection = (sectionId: number | null) : RAction => ({
+export const setSelectedSection = (sectionId: number | null): RAction => ({
     type: QuestionsActions.SetSelectedSection,
-    payload: sectionId
+    payload: sectionId,
 })
 
-export const updateSection = (payload: Section) : RAction => ({
+export const updateSection = (payload: Section): RAction => ({
     type: QuestionsActions.UpdateSection,
-    payload
+    payload,
 })
 
-export const getSections = (sessionId: string) : RAction => ({
+export const getSections = (sessionId: string): RAction => ({
     type: QuestionsActions.GetSections,
-    payload: sessionId
+    payload: sessionId,
 })
 
-export const getQuestions = (payload: GetQuestionsPayload) : RAction => ({
+export const getQuestions = (payload: GetQuestionsPayload): RAction => ({
     type: QuestionsActions.GetQuestions,
-    payload
+    payload,
 })
 
-export const setSearchQuery = (payload: string) : RAction => ({
+export const setSearchQuery = (payload: string): RAction => ({
     type: QuestionsActions.SetSearchQuery,
-    payload
+    payload,
 })
 
-export const searchQuestions = (sessionId: string) : RAction => ({
+export const searchQuestions = (sessionId: string): RAction => ({
     type: QuestionsActions.SearchQuestions,
-    payload: sessionId
+    payload: sessionId,
 })
 
-export const setSize = (size: number) : RAction => ({
+export const setSize = (size: number): RAction => ({
     type: QuestionsActions.SetSize,
-    payload: size
+    payload: size,
 })
 
-export const setFound = (payload: Question[]) : RAction => ({
+export const setFound = (payload: Question[]): RAction => ({
     type: QuestionsActions.SetFound,
-    payload
+    payload,
 })
 
-export const setIsFound = (payload: boolean) : RAction => ({
+export const setIsFound = (payload: boolean): RAction => ({
     type: QuestionsActions.SetIsFound,
-    payload
+    payload,
 })

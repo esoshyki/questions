@@ -1,67 +1,73 @@
-import { QuestionsState, RAction } from "../../types";
-import { QuestionsActions } from "./questions.action";
+import { QuestionsState, RAction } from '../../types'
+import { QuestionsActions } from './questions.action'
 
 const init: QuestionsState = {
     selectedSection: null,
     sections: [],
     loading: false,
-    searchQuery: "",
+    searchQuery: '',
     size: 10,
     found: [],
-    isFound: false
-};
+    isFound: false,
+}
 
-export const questionReducer = (state = init, action: RAction) : QuestionsState => {
-    const { payload, type } = action;
+export const questionReducer = (
+    state = init,
+    action: RAction
+): QuestionsState => {
+    const { payload, type } = action
 
     switch (type) {
-
         case QuestionsActions.SetSections:
             return {
                 ...state,
-                sections: payload
+                sections: payload,
             }
 
         case QuestionsActions.UpdateSection:
             return {
                 ...state,
-                selectedSection: payload
+                selectedSection: payload,
             }
 
         case QuestionsActions.SetLoading:
             return {
                 ...state,
-                loading: payload
+                loading: payload,
             }
-        
+
         case QuestionsActions.SetSearchQuery:
             return {
                 ...state,
-                searchQuery: payload
+                searchQuery: payload,
             }
 
         case QuestionsActions.SetSelectedSection:
             return {
                 ...state,
-                selectedSection: !payload ? payload : (state.sections.find(section => section.ID === payload) || null)
+                selectedSection: !payload
+                    ? payload
+                    : state.sections.find(
+                          (section) => section.ID === payload
+                      ) || null,
             }
 
         case QuestionsActions.SetSize:
             return {
                 ...state,
-                size: payload
+                size: payload,
             }
 
         case QuestionsActions.SetFound:
             return {
                 ...state,
-                found: payload
+                found: payload,
             }
 
         case QuestionsActions.SetIsFound:
             return {
                 ...state,
-                isFound: payload
+                isFound: payload,
             }
 
         default:

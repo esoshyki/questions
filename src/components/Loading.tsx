@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { keyframes } from "styled-components";
-import { zIndexes } from "../zIndexes";
+import React from 'react'
+import styled, { keyframes } from 'styled-components'
+import { zIndexes } from '../zIndexes'
 
 const rotate = keyframes`
     0% {
@@ -12,7 +12,7 @@ const rotate = keyframes`
     100% {
         transform: rotate(360deg)
     }
-`;
+`
 
 const LoaderLayout = styled.div`
     position: absolute;
@@ -26,7 +26,7 @@ const LoaderLayout = styled.div`
     align-items: center;
     justify-content: center;
     min-height: 800px;
-`;
+`
 
 const LoaderSpinnerEclipse = styled.div`
     width: 200px;
@@ -34,7 +34,7 @@ const LoaderSpinnerEclipse = styled.div`
     display: inline-block;
     overflow: hidden;
     background: transparent;
-`;
+`
 
 const LoaderInner = styled.div`
     position: absolute;
@@ -47,7 +47,7 @@ const LoaderInner = styled.div`
     box-shadow: 0 4px 0 0 #e15b64;
     transform-origin: 80px 82px;
     box-sizing: border-box;
-`;
+`
 
 const LoaderWrapper = styled.div`
     width: 100%;
@@ -56,10 +56,9 @@ const LoaderWrapper = styled.div`
     transform: translateZ(0) scale(1);
     backface-visibility: hidden;
     transform-origin: 0 0;
-`;
+`
 
 const Loading = () => {
-
     return (
         <LoaderLayout>
             <LoaderSpinnerEclipse>
@@ -68,7 +67,7 @@ const Loading = () => {
                 </LoaderWrapper>
             </LoaderSpinnerEclipse>
         </LoaderLayout>
-    );
-};
+    )
+}
 
-export default Loading;
+export default Loading
