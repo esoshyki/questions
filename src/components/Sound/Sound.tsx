@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import React from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { select } from "../../store/selector";
@@ -13,7 +13,6 @@ const Wrapper = styled.div`
 const Sound = () => {
 
     const dispatch = useDispatch();
-    const audioRef = useRef<HTMLAudioElement>(null);
 
     const sound = useSelector(select.view.sound)
 
@@ -24,14 +23,17 @@ const Sound = () => {
     return (
         <Wrapper>
             <button className="ui-btn" onClick={handleClick}>
-                {sound ? "Выключить звун" : "Вкючить звук"}
+                {sound ? "Выключить звук" : "Вкючить звук"}
             </button>
             <audio 
-                src="https://firebasestorage.googleapis.com/v0/b/su-10-ee191.appspot.com/o/guitar.mp3?alt=media&token=562b024c-d0e5-4e1e-b434-2075e1fa62f2"
                 loop={true}
                 autoPlay={true}
-                ref={audioRef}
-                ></audio>
+                >
+                <source 
+                    type="audio/mp3"
+                    src="https://firebasestorage.googleapis.com/v0/b/su-10-ee191.appspot.com/o/guitar.mp3?alt=media&token=562b024c-d0e5-4e1e-b434-2075e1fa62f2">
+                </source>
+            </audio>
         </Wrapper>
     )
 };

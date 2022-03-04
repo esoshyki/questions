@@ -12,6 +12,7 @@ import Sections from "./components/Sections";
 import Search from "./components/Search";
 import Questions from "./components/Questions";
 import AddQuestionButton from "./components/AddQuestion/AddQuestionButton";
+import Sound from "./components/Sound";
 
 declare global {
     interface Window {
@@ -68,6 +69,7 @@ const App = () => {
             </Right>
             {result && <AddQuestionResult />}
 
+            <Sound />
         </Layout>
     )
 };
