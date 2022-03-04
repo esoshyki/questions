@@ -51,6 +51,7 @@ export type QuestionsState = {
     size: number;
     found: Question[];
     isFound: boolean;
+    loaded: boolean;
 };
 
 export type AddQuestionState = {

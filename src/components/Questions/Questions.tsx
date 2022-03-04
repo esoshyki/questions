@@ -2,7 +2,7 @@ import React, { Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import { fakeSessionId } from '../../api/instance'
-import { getQuestions } from '../../store/questions/questions.action'
+import { getQuestions, setLoaded } from '../../store/questions/questions.action'
 import { select } from '../../store/selector'
 import QuestionList from './QuestionList'
 
@@ -13,30 +13,30 @@ const Title = styled.h2`
 `
 
 const QuestionContainer = () => {
-    const dispatch = useDispatch();
+    const dispatch = useDispatch()
     const selectedSection = useSelector(select.questions.selectedSection)
     const loading = useSelector(select.questions.loading)
     const size = useSelector(select.questions.size)
     const found = useSelector(select.questions.found)
     const searchQuery = useSelector(select.questions.searchQuery)
-    const isFound = useSelector(select.questions.isFound);
-    const ID = selectedSection?.ID || null;
+    const isFound = useSelector(select.questions.isFound)
+    const loaded = useSelector(select.questions.loaded)
 
     useEffect(() => {
+        if (loaded) return;
         if (selectedSection) {
-            const section = {
-                ...selectedSection,
-                page: selectedSection?.page || 1,
+            if (!selectedSection.page) {
+                selectedSection.page = 1
             }
+            dispatch(setLoaded(true))
             dispatch(
                 getQuestions({
                     size,
-                    selectedSection: section,
+                    selectedSection,
                     sessionId: window.faqConfig?.sessionId || fakeSessionId,
-                })
-            )
-        }
-    }, [dispatch, ID, size])
+                }))
+            }
+    }, [dispatch, selectedSection, size, loaded])
 
     const loadNextPage = () => {
         if (!loading && selectedSection) {

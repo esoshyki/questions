@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { setSelectedSection } from "../../store/questions/questions.action";
+import { setLoaded, setSelectedSection } from "../../store/questions/questions.action";
 import { select } from "../../store/selector";
 import { theme } from "../../theme";
 
@@ -41,9 +41,10 @@ const Category = ({ name, id } : {
 
     const handleClick = () => {
         if (selectedSection?.ID === id) {
-            dispatch(setSelectedSection(null))
+            dispatch(setSelectedSection(null));
+            dispatch(setLoaded(false))
         } else {
-            dispatch(setSelectedSection(id))
+            dispatch(setSelectedSection(id));
         }
     };
 

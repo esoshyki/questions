@@ -7,6 +7,7 @@ const selectedSection = (state: State) => state.questions.selectedSection
 const size = (state: State) => state.questions.size
 const found = (state: State) => state.questions.found
 const isFound = (state: State) => state.questions.isFound
+const loaded = (state: State) => state.questions.loaded
 
 export const questionsSelect = {
     sections,
@@ -16,4 +17,5 @@ export const questionsSelect = {
     size,
     found,
     isFound,
+    loaded
 }

@@ -9,6 +9,7 @@ const init: QuestionsState = {
     size: 10,
     found: [],
     isFound: false,
+    loaded: false,
 }
 
 export const questionReducer = (
@@ -68,6 +69,12 @@ export const questionReducer = (
             return {
                 ...state,
                 isFound: payload,
+            }
+
+        case QuestionsActions.SetLoaded:
+            return {
+                ...state,
+                loaded: payload
             }
 
         default:
