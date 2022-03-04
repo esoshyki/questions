@@ -4,12 +4,9 @@ import styled from "styled-components";
 import { setHeight } from "../../store/view/view.actions";
 import { HOC } from "../../types";
 
-const AppWrapper = styled.div<{
-    bitrix: boolean
-}>`
+const AppWrapper = styled.div`
     width: 100%;
-    min-height: 800px;
-    height: ${props => props.bitrix ? "100%" : "100vh"};
+    min-height: calc(100vh - 296px);
     * {
         box-sizing: border-box;
     };
@@ -45,8 +42,6 @@ const Layout = (props: HOC) => {
 
     return (
         <AppWrapper 
-            
-            bitrix={!!window.faqConfig?.sessionId}
             ref={ref}
             >
             {props.children}

@@ -10,6 +10,7 @@ const Title = styled.h2`
     font-weight: 900;
     text-align: start;
     width: calc(100% - 20px);
+    margin: 0 0 30px;
 `
 
 const QuestionContainer = () => {

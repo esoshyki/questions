@@ -1,6 +1,7 @@
 import React, { ReactChild} from 'react'
 import styled from 'styled-components'
 import { BXHeader } from './BitrixHeader'
+import { BXFooter } from './BXFooter';
 import { BXLeftAsside } from './BXLeftAsside'
 import { BXRightAsside } from './BXRightAsside';
 
@@ -48,8 +49,8 @@ const BitrixLayout = ({ children } : {
                     {children}
                 </Content>
                 <BXRightAsside />
-                
             </Center>
+            <BXFooter />
         </Wrapper>
     )
 }
