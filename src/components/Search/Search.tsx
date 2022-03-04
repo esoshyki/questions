@@ -6,6 +6,7 @@ import { select } from '../../store/selector'
 import {
     searchQuestions,
     setFound,
+    setIsFound,
     setSearchQuery,
 } from '../../store/questions/questions.action'
 import { fakeSessionId } from '../../api/instance'
@@ -70,7 +71,8 @@ const Search = () => {
         const sessionId = window.faqConfig?.sessionId || fakeSessionId
         console.log('update')
         if (!ref.current?.value) {
-            dispatch(setFound([]))
+            dispatch(setFound([]));
+            dispatch(setIsFound(false));
             dispatch(getSections(sessionId))
         } else {
             dispatch(searchQuestions(sessionId))

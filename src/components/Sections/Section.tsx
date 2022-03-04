@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { setLoaded, setSelectedSection } from "../../store/questions/questions.action";
+import { setFound, setIsFound, setLoaded, setSelectedSection } from "../../store/questions/questions.action";
 import { select } from "../../store/selector";
 import { theme } from "../../theme";
 
@@ -40,6 +40,8 @@ const Category = ({ name, id } : {
     const selectedSection = useSelector(select.questions.selectedSection);
 
     const handleClick = () => {
+        dispatch(setFound([]));
+        dispatch(setIsFound(false));
         if (selectedSection?.ID === id) {
             dispatch(setSelectedSection(null));
             dispatch(setLoaded(false))

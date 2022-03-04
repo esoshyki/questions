@@ -12,7 +12,7 @@ import Sections from "./components/Sections";
 import Search from "./components/Search";
 import Questions from "./components/Questions";
 import AddQuestionButton from "./components/AddQuestion/AddQuestionButton";
-import Sound from "./components/Sound";
+// import BitrixLayout from "./components/Layout/Bitrix/BitrixLayout";
 
 declare global {
     interface Window {
@@ -56,20 +56,21 @@ const App = () => {
     }, [dispatch, sections, once, size])
 
     return (
-        <Layout >
-            {loading && <Loading/>}
-            <Left>
-               <Questions />
-            </Left>
-            
-            <Right>
-                <AddQuestionButton />
-                <Search />
-                <Sections />
-            </Right>
-            {result && <AddQuestionResult />}
-
-        </Layout>
+        // <BitrixLayout>
+            <Layout >
+                {loading && <Loading/>}
+                <Left>
+                <Questions />
+                </Left>
+                
+                <Right>
+                    <AddQuestionButton />
+                    <Search />
+                    <Sections />
+                </Right>
+                {result && <AddQuestionResult />}
+            </Layout>
+        // </BitrixLayout>
     )
 };
 
