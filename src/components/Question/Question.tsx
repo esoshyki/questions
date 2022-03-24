@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
-import styled from "styled-components";
-import { api } from "../../api/api";
-import { fakeSessionId } from "../../api/instance";
-import { Question as QuestionType } from "../../types";
-import Loading from "../Loading";
-import QuestionBody from "./QuestionBody";
+import { Fragment, useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import styled from 'styled-components'
+import { api } from '../../api/api'
+import { fakeSessionId } from '../../api/instance'
+import { Question as QuestionType } from '../../types'
+import Loading from '../Loading'
+import Typography from '../ui/Typography'
+import QuestionBody from './QuestionBody'
 
 const Wrapper = styled.div`
   display: flex;
@@ -15,18 +17,17 @@ const Wrapper = styled.div`
   padding: 30px 50px;
 `
 
-const Question = ({ id } : { id?: number }) => {
-
-  const [question, setQuestion] = useState<QuestionType | null>(null);
-  const [loading, setLoading] = useState(false);
+const Question = ({ id }: { id?: number }) => {
+  const [question, setQuestion] = useState<QuestionType | null>(null)
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const sessid = window?.faqConfig?.sessionId || fakeSessionId;
+    const sessid = window?.faqConfig?.sessionId || fakeSessionId
     const fetchQuestion = async (id: number) => {
-      setLoading(true);
-      const fetchedQuestion = await api.getQuestionById(id, sessid);
-      setQuestion(fetchedQuestion);
-      setLoading(false);
+      setLoading(true)
+      const fetchedQuestion = await api.getQuestionById(id, sessid)
+      setQuestion(fetchedQuestion)
+      setLoading(false)
     }
 
     if (id) {
@@ -44,9 +45,21 @@ const Question = ({ id } : { id?: number }) => {
     <Wrapper>
       {loading && <Loading />}
 
-      {question && <QuestionBody question={question}/>}
+      {question && <QuestionBody question={question} />}
+
+      {!question && !loading && (
+        <Fragment>
+          <Typography.H2 styles={{ color: 'darkred' }}>
+            Вопрос не найден
+          </Typography.H2>
+
+          <Link to="/">
+            <Typography.SPAN>Вернутся назад</Typography.SPAN>
+          </Link>
+        </Fragment>
+      )}
     </Wrapper>
   )
-};
+}
 
 export default Question

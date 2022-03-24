@@ -5,7 +5,7 @@ import axios from 'axios';
 //     : "/bitrix/services/main/ajax.php"
 
 const apiURL = "https://test-server-tau.vercel.app"
-// const apiURL = "http://localhost:4000"
+// const apiURL = "http://localhost:4000/"
 
 console.log(apiURL);
 
