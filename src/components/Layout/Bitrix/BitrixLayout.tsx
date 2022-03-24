@@ -1,4 +1,4 @@
-import React, { ReactChild} from 'react'
+import React, { ReactNode} from 'react'
 import styled from 'styled-components'
 import { BXHeader } from './BitrixHeader'
 import { BXFooter } from './BXFooter';
@@ -35,7 +35,7 @@ const ToolBarContainer = styled.div`
 `
 
 const BitrixLayout = ({ children } : {
-    children: ReactChild
+    children: ReactNode
 }) => {
 
     return (

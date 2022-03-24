@@ -102,11 +102,33 @@ const search = async (query: string, sessionID: string) : Promise<Question[]> =>
     } catch (error) {
         return []   
     }
+};
+
+const getQuestionById =async (questionId: number, sessid: string ) : Promise<Question | null> => {
+    try {
+        const response: AxiosResponse = await instanceAPI.get("/", {
+            params: {
+                action: ApiActions.GetQuestion,
+                sessid,
+                questionId
+            }
+        })
+
+        const bitrixResponse: BitrixResponse = response.data;
+
+        const question : Question | null = bitrixResponse.data;
+
+        return question
+
+    } catch (error) {
+        return null
+    }
 }
 
 export const api = {
     getSections,
     getQuestions,
     newQuestion,
+    getQuestionById,
     search,
 }

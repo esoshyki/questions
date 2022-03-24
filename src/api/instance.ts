@@ -5,6 +5,9 @@ import axios from 'axios';
 //     : "/bitrix/services/main/ajax.php"
 
 const apiURL = "https://test-server-tau.vercel.app"
+// const apiURL = "http://localhost:4000"
+
+console.log(apiURL);
 
 export const fakeSessionId = "e14e316cb5cbcae4320a834ebb234f56";
 

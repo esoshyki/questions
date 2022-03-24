@@ -90,6 +90,7 @@ export enum ApiActions {
     Search = "search",
     GetPageSections = "getPageSections",
     GetSectionQuestion = "GetSectionQuestion",
+    GetQuestion = "getQuestion"
 }
 
 // // // // // // // 
